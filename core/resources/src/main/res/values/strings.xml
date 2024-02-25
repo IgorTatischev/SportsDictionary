@@ -1,0 +1,195 @@
+<resources>
+    <string name="sign_up_success">Registration is successful</string>
+    <string name="log_in_success">Log in is successful</string>
+    <string name="error">Some error occurred</string>
+
+    <string name="sports">Sports</string>
+    <string name="football">Football</string>
+    <string name="tennis">Tennis</string>
+    <string name="basketball">Basketball</string>
+    <string name="handball">Handball</string>
+    <string name="golf">Golf</string>
+    <string name="kick">Kickboxing</string>
+    <string name="wrestling">Wrestling</string>
+    <string name="racing">Motor Racing</string>
+    <string name="betting">Sports betting</string>
+    <string name="comments">Comments</string>
+
+    <string-array name="football_steps">
+        <item>1. Touchdown: When a team successfully moves the ball into the opposing team\'s end zone,earning them 6 points.</item>
+        <item>2. Field goal: When a team kicks the ball between the opponent\'s goalposts, earning them 3 points.</item>
+        <item>3. Extra point: After a touchdown, the scoring team has the option to kick the ball through the opponent\'s goalposts for an additional point.</item>
+        <item>4. Two-point conversion: After a touchdown, the scoring team can choose to try and score an additional two points by running or passing the ball into the end zone again from a short distance.</item>
+        <item>5. Interception: When a defensive player catches a forward pass intended for an offensive player.</item>
+        <item>6. Fumble: When a player loses possession of the ball during a play, often resulting in a turnover.</item>
+        <item>7. Sack: When a defensive player tackles the opposing team\'s quarterback behind the line of scrimmage, resulting in a loss of yardage.</item>
+        <item>8. Quarterback: The leader of the offensive team who usually throws the ball and directs the team\'s plays.</item>
+        <item>9. Wide receiver: An offensive player who tries to catch passes from the quarterback and advance the ball down the field.</item>
+        <item>10. Running back: An offensive player who primarily carries the ball in running plays.</item>
+        <item>11. Offensive lineman: The players who block and protect the quarterback and running back.</item>
+        <item>12. Defensive lineman: The players who try to prevent the offence from moving the ball by tackling the quarterback or stopping the running back.</item>
+        <item>13. Line of scrimmage: The imaginary line where the football is placed at the start of each play, dividing the offensive and defensive teams.</item>
+        <item>14. Play-action pass: A passing play in which the quarterback fakes a handoff to a running back, which helps to attract defenders and open up passing lanes.</item>
+        <item>15. Hail Mary: A desperation pass thrown to the end zone at the end of a game when the offence is trailing and needs a touchdown to win.</item>
+        <item>16. Blitz: When multiple defensive players rush toward the quarterback in an attempt to sack him before he can pass.</item>
+        <item>17. Offensive coordinator: The coach responsible for designing and calling the offensive plays.</item>
+        <item>18. Defensive coordinator: The coach responsible for designing and calling the defensive plays.</item>
+        <item>19. Red zone: The area on the field between the 20-yard line and the opponent\'s goal line, where teams have a higher chance of scoring.</item>
+        <item>20. 1st down: The first play of a series in which the offense has four opportunities (downs) to gain 10 yards and earn another first down.</item>
+    </string-array>
+
+    <string-array name="tennis_steps">
+        <item>1. Ace: When a player serves the ball and their opponent fails to touch it, it is called an ace.</item>
+        <item>2. Backhand: A stroke hit on the non-dominant side of a player\'s body, using the back of their racket.</item>
+        <item>3. Baseline: The back boundary line of the tennis court, parallel to the net.</item>
+        <item>4. Break: When the receiver wins a game in which the server was leading, it is called a break of serve.</item>
+        <item>5. Deuce: When the score is tied at 40–40, it is referred to as deuce. The next point won after deuce is called advantage.</item>
+        <item>6. Double fault: When a player fails to successfully serve the ball into the opponent\'s service box twice in a row, it is known as a double fault. </item>
+        <item>7. Fault: When a player fails to successfully serve the ball into the opponent\'s service box, it is called a fault.</item>
+        <item>8. Game: A game is won by the player who successfully wins four points and has a lead of at least two points.</item>
+        <item>9. Grand Slam: The four major tournaments in tennis – Australian Open, French Open, Wimbledon, and US Open – are collectively known as the Grand Slam.</item>
+        <item>10. Groundstroke: A shot hit by a player after the ball has bounced on their side of the court.</item>
+        <item>11. Let: When a served ball hits the net but still lands within the correct service box, it is called a let. The player gets to serve again.</item>
+        <item>12. Love: When a player has a score of zero, it is referred to as love.</item>
+        <item>13. Match point: The point that, if won, would give a player victory in the match.</item>
+        <item>14. Rally: A sequence of shots played between two or more players without the ball touching the ground.</item>
+        <item>15. Set: A set is a collection of games. A player needs to win at least six games and have a lead of at least two games to win a set.</item>
+        <item>16. Slice: A shot with backspin that causes the ball to curve downwards.</item>
+        <item>17. Smash: A powerful overhead shot that is hit downwards, typically when the opponent lobs the ball.</item>
+        <item>18. Tiebreak: If the score reaches 6–6 in a set, a tiebreak is played to determine the winner of the set. The first player to reach seven points with a lead of at least two points wins the tiebreak.</item>
+        <item>19. Volley: A shot played in mid-air without allowing the ball to bounce on the court. Typically, it is played near the net.</item>
+        <item>20. Winner: A shot that lands in the opponent\'s court, resulting in a point for the player hitting the shot.</item>
+    </string-array>
+
+    <string-array name="basketball_steps">
+        <item>1. Lay-up: a shot taken close to the basket using one hand.</item>
+        <item>2. Dunk: a shot where a player jumps and forcefully throws the ball through the hoop.</item>
+        <item>3. Rebound: the act of grabbing the ball after a missed shot.</item>
+        <item>4. Assist: a pass that directly leads to a made basket.</item>
+        <item>5. Block: the act of stopping a shot attempt by jumping in front of the shooter and swatting the ball away.</item>
+        <item>6. Steal: the act of taking the ball away from an opposing player without committing a foul.</item>
+        <item>7. Fast break: when a team quickly moves the ball up the court after gaining possession, often resulting in an easy scoring opportunity.</item>
+        <item>8. Jump ball: a method used to begin a basketball game or resolve a tied possession, where the referee tosses the ball into the air and two players jump to try and tap it to their teammates.</item>
+        <item>9. Three-pointer: a shot taken behind the three-point line, awarded three points.</item>
+        <item>10. Free throw: an unopposed shot taken from the free-throw line after a foul, worth one point.</item>
+        <item>11. Foul: an illegal action that results in a disadvantage for the opposing team, leading to free throws or the possession of the ball.</item>
+        <item>12. Double team: when two defenders focus on guarding a single offensive player, often done to deny scoring opportunities.</item>
+        <item>13. Pick and roll: an offensive play where a player sets a screen for a teammate, then rolls towards the basket after the screen to receive a pass.</item>
+        <item>14. Post-up: an offensive move where a player positions themselves close to the basket, using their size and strength to take advantage of a smaller defender.</item>
+        <item>15. Turnover: when the offensive team loses possession of the ball without getting a shot attempt.</item>
+        <item>16. Zone defense: a defensive strategy where players are responsible for guarding a specific area rather than an individual player.</item>
+        <item>17. Man-to-man defense: a defensive strategy where each player is assigned to guard a specific opponent.</item>
+        <item>18. Box out: a technique where a player positions themselves between an opponent and the basket to secure a rebound.</item>
+        <item>19. Fast break: when a team quickly moves the ball up the court after gaining possession, often resulting in an easy scoring opportunity.</item>
+        <item>20. Double dribble: a violation where a player dribbles the ball with both hands simultaneously or stops dribbling and then starts dribbling again.These are just a few of the many basketball terms used in the sport.</item>
+    </string-array>
+
+    <string-array name="handball_steps">
+        <item>1. Fast break: When a team quickly transitions from defence to offence to score a goal before the opposition can set up their defence.</item>
+        <item>2. Pivot: A player who remains stationary while holding the ball and rotates their body to find an open teammate or create a shooting opportunity.</item>
+        <item>3. Wing player: Positioned on the outside edges of the court, either on the left or right side, and are responsible for receiving passes and scoring goals.</item>
+        <item>4. Goalkeeper: The player who defends the goal by blocking shots with their hands, body, or feet.</item>
+        <item>5. Dribbling: The action of moving the ball by bouncing it on the ground while maintaining control.</item>
+        <item>6. Goal line throw: A method of restarting the game after the ball crosses the goal line but was last touched by a defender.</item>
+        <item>7. Penalty throw: A direct shot on goal from a designated position awarded to an attacking player when a major defensive infringement occurs.</item>
+        <item>8. Technical foul: A minor violation of the rules such as taking more than three steps without dribbling or holding onto an opponent\'s jersey.</item>
+        <item>9. Offensive foul: A violation committed by an offensive player, resulting in a turnover and possession being awarded to the opposing team.</item>
+        <item>10. Double dribble: When a player dribbles the ball, then picks it up, and dribbles it again without passing or shooting.</item>
+        <item>11. Time-out: A break in the game called by either team\'s coach to discuss tactics, make substitutions, or change the team\'s strategy.</item>
+        <item>12. Jump shot: A method of shooting where a player jumps off both feet and releases the ball while in the air to avoid defenders.</item>
+        <item>13. Fast-paced: Refers to a style of play characterized by quick passes, constant movement, and attacking at a high tempo.</item>
+        <item>14. Zone defence: A defensive strategy where players are responsible for guarding an area of the court rather than specific opponents.</item>
+        <item>15. Man-to-man defence: A defensive strategy where each player is assigned to guard a specific opponent and closely mark them throughout the game.</item>
+    </string-array>
+
+    <string-array name="golf_steps">
+        <item>1. Birdie: Scoring one less stroke than par on a hole</item>
+        <item>2. Eagle: Scoring two less strokes than par on a hole</item>
+        <item>3. Par: The expected number of strokes to complete a hole or course</item>
+        <item>4. Bogey: Scoring one stroke over par on a hole</item>
+        <item>5. Double bogey: Scoring two strokes over par on a hole</item>
+        <item>6. Triple bogey: Scoring three strokes over par on a hole</item>
+        <item>7. Albatross: Scoring three less strokes than par on a hole</item>
+        <item>8. Ace: A hole-in-one, hitting the ball directly into the cup from the tee</item>
+        <item>9. Fairway: The well-maintained area between the tee and the green where the ball is intended to be hit</item>
+        <item>10. Rough: The long grass or challenging terrain outside of the fairway</item>
+        <item>11. Hazard: A natural or man-made obstacle on the course, such as water or a sand trap</item>
+        <item>12. Mulligan: A free, unofficial stroke allowed for beginners or used for practice, where a player retakes a shot without penalty</item>
+        <item>13. Chip: A short, low-trajectory shot played from close to the green</item>
+        <item>14. Putt: A stroke made on the green with a putter to roll the ball towards the hole</item>
+        <item>15. Approach: A shot played from the fairway that is intended to reach the green</item>
+        <item>16. Backspin: A type of spin applied to a golf ball to make it stop quickly or reverse direction upon landing</item>
+        <item>17. Fade: A shot that curves right-to-left (for a right-handed player) intentionally</item>
+        <item>18. Draw: A shot that curves left-to-right (for a right-handed player) intentionally</item>
+        <item>19. Shank: A shot where the ball is struck with the holes of the club, resulting in a misdirected and short shot</item>
+        <item>20. Sand trap: Also known as a bunker, a depression filled with sand located near the green that presents a challenge to players</item>
+    </string-array>
+
+    <string-array name="kick_steps">
+        <item>1. Jab - A quick, straight punch thrown with the lead hand.</item>
+        <item>2. Cross - A powerful, straight punch thrown with the rear hand.</item>
+        <item>3. Hook - A punch that comes from the side, delivered with a bent arm.</item>
+        <item>4. Uppercut - An upward punch thrown from a crouched position, aiming at the chin or body.</item>
+        <item>5. Front kick - A kick delivered with the ball of the foot using the front leg.</item>
+        <item>6. Side kick - A kick delivered with the heel of the foot, with the leg swung to the side.</item>
+        <item>7. Roundhouse kick - A circular kick delivered with the shin or instep, targeting the opponent\'s side or head.</item>
+        <item>8. Axe kick - A downward kick, similar to striking with an axe motion.</item>
+        <item>9. Spinning back kick - A kick executed by spinning and thrusting the leg backward, often targeting the abdomen or head.</item>
+        <item>10. Knee strike - A strike delivered with the knee, typically targeting the opponent\'s body or head while in close range.</item>
+        <item>11. Clinch - A close-range fighting position where the fighters are in contact with each other, usually involving grappling and strikes.</item>
+        <item>12. Guard - A defensive position where the hands are raised to protect the face and body.</item>
+        <item>13. Cross-block - A defensive technique where the front arm is crossed over the body to block punches from the opponent.</item>
+        <item>14. Parry - A defensive move where a punch or kick is deflected or redirected, often using minimal force.</item>
+        <item>15. Bob and weave - A defensive tactic involving ducking and swaying to avoid incoming strikes.</item>
+        <item>16. Round - A period of time in a kickboxing match, typically lasting three minutes in amateur bouts and three to five minutes in professional fights.</item>
+        <item>17. Knockout (KO) - When a fighter becomes unconscious and cannot continue the match.</item>
+        <item>18. Technical knockout (TKO) - When a fighter cannot continue due to injury or the referee\'s decision to stop the fight to protect the fighter.</item>
+        <item>19. Referee - The official who oversees the fight and enforces the rules.</item>
+        <item>20. Ring - The designated fighting area encircled by ropes or barriers.</item>
+    </string-array>
+
+    <string-array name="wrestling_steps">
+        <item>1. Pinfall: Occurs when one wrestler holds the other\'s shoulders on the mat for a specified amount of time, resulting in a win.</item>
+        <item>2. Submission: When a wrestler forces their opponent to give up by applying a hold or maneuver that puts pressure on a body part, usually resulting in a tap out or verbal submission.</item>
+        <item>3. DQ (Disqualification): When a wrestler breaks the rules or engages in unsportsmanlike conduct, resulting in an immediate loss.</item>
+        <item>4. Count-out: A wrestler is counted out if they fail to re-enter the ring within a ten-count after being outside the ring.</item>
+        <item>5. Rope break: When a wrestler has a submission hold applied but reaches the ropes, and the referee calls for a break, forcing their opponent to release the hold.</item>
+        <item>6. Face: A wrestler portrayed as a hero or fan-favourite.</item>
+        <item>7. Heel: A wrestler portrayed as a villain or antagonist.</item>
+        <item>8. Babyface: A term used to refer to a wrestler who is the clear hero in a match.</item>
+        <item>9. Tweener: A wrestler who does not strictly adhere to being a face or heel, often portraying a more complex character.</item>
+        <item>10. Turn: When a wrestler changes from being a face to a heel, or vice versa.</item>
+        <item>11. Finisher: A wrestler\'s signature move that most often leads to a pin or submission victory.</item>
+        <item>12. High spot: A particularly impressive or memorable move or sequence in a match.</item>
+        <item>13. Gimmick: The persona or character that a wrestler portrays.</item>
+        <item>14. Kayfabe: The practice of maintaining the illusion of wrestling\'s authenticity, both in and out of the ring.</item>
+        <item>15. Go home: The final part of a match where the wrestlers execute the predetermined finish.</item>
+        <item>16. Tag team: A match involving two teams of two wrestlers, where the wrestlers can tag in and out of the match.</item>
+        <item>17. Stable: A group of wrestlers who align together for a common purpose.</item>
+        <item>18. Hardcore match: A match that allows the use of weapons or features an extreme ruleset.</item>
+        <item>19. Steel cage match: A match in which the ring is surrounded by a steel cage, preventing escape and intensifying the competition.</item>
+        <item>20. WrestleMania: WWE’s annual flagship event that typically culminates storylines and features high-profile matches.</item>
+    </string-array>
+
+    <string-array name="racing_steps">
+        <item>1. Apex: The point on a racing line where a car is closest to the inside of a turn.</item>
+        <item>2. Braking Zone: The part of a track where a driver applies the brakes in order to slow down for a turn or corner.</item>
+        <item>3. Cornering Line: The path a car takes through a corner to maximize speed and minimize time.</item>
+        <item>4. Drafting: The technique of closely following another car in order to reduce aerodynamic drag and gain a speed advantage.</item>
+        <item>5. DRS (Drag Reduction System): A system that reduces aerodynamic drag on the car, usually through an adjustable rear wing, to increase top speed.</item>
+        <item>6. Grid: The starting position of a car on the starting grid, determined by qualifying times.</item>
+        <item>7. Hairpin Turn: A sharp and tight turn with almost 180-degree change in direction.</item>
+        <item>8. KERS (Kinetic Energy Recovery System): A system that recovers and stores energy generated during braking and releases it as a power boost for the car.</item>
+        <item>9. Overtaking: The act of one car passing another on the track.</item>
+        <item>10. Pit Stop: A stop made by a car during a race to refuel, change tires, or make necessary repairs or adjustments.</item>
+        <item>11. Pole Position: The starting position at the front of the grid, obtained by setting the fastest qualifying time.</item>
+        <item>12. Racing Line: The ideal path through a corner or turn that allows for the fastest speed, shortest distance, and maximum grip.</item>
+        <item>13. Slick Tires: Tires with no pattern or tread, designed for optimal grip on dry surfaces.</item>
+        <item>14. Safety Car: A car deployed during a race to slow down the field and ensure safety on the track, usually due to an accident or debris.</item>
+        <item>15. Slipstream: The reduced air resistance experienced by a car when closely following another car, creating an opportunity for overtaking.</item>
+        <item>16. Steward: Officials responsible for enforcing race regulations and imposing penalties on drivers who violate rules.</item>
+        <item>17. Throttle: The control used by the driver to regulate the power output of the engine.</item>
+        <item>18. Understeer: When the front tires lose traction in a turn, causing the car to continue in a straight line rather than following the desired cornering line.</item>
+        <item>19. Yellow Flag: A flag displayed to indicate caution on the track, usually due to an accident or hazard, signaling drivers to slow down and be prepared to stop.</item>
+    </string-array>
+</resources>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="english">English</string>
+    <string name="spanish">Español</string>
+
+    <string name="delete">Delete Account</string>
+    <string name="success_delete_account">Account deleted</string>
+    <string name="sign_in">Sign In</string>
+    <string name="write_us">Write Us</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="change_name">Change name</string>
+    <string name="change_name_confirm">Change</string>
+    <string name="change_name_dismiss">No</string>
+    <string name="success_name_change">Name changed successfully!</string>
+    <string name="language">Language</string>
+    <string name="mail_title">Choose an Email client</string>
+	<string name="by_email">By email: %s</string>
+</resources>

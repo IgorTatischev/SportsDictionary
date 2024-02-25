@@ -1,0 +1,26 @@
+<resources>
+    <string name="button_sign_up">Inscribirse</string>
+    <string name="button_log_in">Acceso</string>
+
+    # Sign up screen
+    <string name="header_title_text">Registrarse</string>
+    <string name="header_description_text">Regístrate para dejar comentarios\ny guardar el contenido que te gusta</string>
+
+    <string name="label_login">Correo electrónico</string>
+    <string name="label_password">Contraseña</string>
+    <string name="label_show">Mostrar</string>
+    <string name="label_hide">Ocultar</string>
+
+    <string name="text_sign_variant">O inicia sesión con</string>
+
+    # Messages for sign up + log in
+    <string name="empty"></string>
+
+    <string name="network_error">Ocurrió un error de red. Por favor revisa tu conexión</string>
+    <string name="error">Se produjo algún error</string>
+
+    # Welcome Screen
+    <string name="welcome_header_text">Bienvenido al\nglosario de deportes</string>
+    <string name="welcome_description_text">Juguemos el cuestionario siempre\ny en todas partes</string>
+    <string name="button_skip">Omitir</string>
+</resources>
