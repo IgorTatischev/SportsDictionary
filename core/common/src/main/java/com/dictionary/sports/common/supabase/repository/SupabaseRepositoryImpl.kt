@@ -6,10 +6,8 @@ import com.dictionary.sports.common.supabase.SupabaseClient
 import com.dictionary.sports.common.supabase.state.AuthResult
 import com.dictionary.sports.common.supabase.state.ChangeUserDataState
 import com.dictionary.sports.common.supabase.state.LoggedInState
-import io.github.jan.supabase.gotrue.gotrue
+import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
 import org.json.JSONObject
 import com.dictionary.sports.resources.R as CoreRes
 
@@ -23,14 +21,9 @@ internal class SupabaseRepositoryImpl(
         navigateToScreen: () -> Unit, userLogin: String, userPassword: String
     ): AuthResult {
         try {
-            supabaseClient.client.gotrue.admin.createUserWithEmail {
+            supabaseClient.client.auth.signUpWith(provider = Email){
                 email = userLogin.trim()
                 password = userPassword.trim()
-                autoConfirm = true
-
-                userMetadata = buildJsonObject {
-                    put(key = "name",value = userLogin.trim().substringBefore('@'))
-                }
             }
 
             saveToken()
@@ -42,6 +35,7 @@ internal class SupabaseRepositoryImpl(
             )
 
             return AuthResult.Success(successMessageRes = CoreRes.string.sign_up_success)
+
         } catch (e: Exception) {
             e.message?.let {
                 return AuthResult.Error(errorMessage = it)
@@ -53,7 +47,7 @@ internal class SupabaseRepositoryImpl(
         navigateToScreen: () -> Unit, userLogin: String, userPassword: String
     ): AuthResult {
         try {
-            supabaseClient.client.gotrue.loginWith(provider = Email) {
+            supabaseClient.client.auth.signInWith(provider = Email) {
                 email = userLogin.trim()
                 password = userPassword.trim()
             }
@@ -69,28 +63,16 @@ internal class SupabaseRepositoryImpl(
     }
 
     override suspend fun saveToken() {
-        val accessToken = supabaseClient.client.gotrue.currentAccessTokenOrNull()
+        val accessToken = supabaseClient.client.auth.currentAccessTokenOrNull()
         accessToken?.let {
             dataStorePreferencesRepository.saveToken(token = accessToken)
         }
     }
 
-    override suspend fun deleteUser(): ChangeUserDataState {
-        return try {
-            val userId = supabaseClient.client.gotrue.retrieveUserForCurrentSession()
-            supabaseClient.client.gotrue.admin.deleteUser(userId.id)
-
-            dataStorePreferencesRepository.saveToken(token = "")
-
-            ChangeUserDataState.Success
-        } catch (e: Exception) {
-            ChangeUserDataState.Error
-        }
-    }
-
+    //todo
     override suspend fun getCurrentUserName(): String {
         return try {
-            val currentUser = supabaseClient.client.gotrue.retrieveUserForCurrentSession()
+            val currentUser = supabaseClient.client.auth.retrieveUserForCurrentSession()
 
             val userEmail = currentUser.email ?: ""
             var name = userEmail.substringBefore('@')
@@ -108,12 +90,17 @@ internal class SupabaseRepositoryImpl(
 
     override suspend fun saveNewNameForUser(newName: String): ChangeUserDataState {
         return try {
-            val userId = supabaseClient.client.gotrue.retrieveUserForCurrentSession()
+            //todo update user name
+//            val userId = supabaseClient.client.auth.retrieveUserForCurrentSession()
+//
+//            supabaseClient.client.auth.admin.updateUserById(userId.id) {
+//                userMetadata = buildJsonObject {
+//                    put("name", newName)
+//                }
+//            }
 
-            supabaseClient.client.gotrue.admin.updateUserById(userId.id) {
-                userMetadata = buildJsonObject {
-                    put("name", newName)
-                }
+            val user = supabaseClient.client.auth.modifyUser {
+                email = "newEmail@email.com"
             }
 
             ChangeUserDataState.Success
@@ -125,8 +112,8 @@ internal class SupabaseRepositoryImpl(
     override suspend fun isUserLoggedIn(token: String): LoggedInState {
         return try {
             if (token.isNotEmpty()) {
-                supabaseClient.client.gotrue.retrieveUser(token)
-                supabaseClient.client.gotrue.refreshCurrentSession()
+                supabaseClient.client.auth.retrieveUser(token)
+                supabaseClient.client.auth.refreshCurrentSession()
                 saveToken()
                 LoggedInState.Success(isLoggedIn = true)
             } else {

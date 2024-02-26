@@ -4,8 +4,9 @@ import com.dictionary.sports.common.BuildConfig
 import io.github.jan.supabase.compose.auth.ComposeAuth
 import io.github.jan.supabase.compose.auth.googleNativeLogin
 import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.gotrue.GoTrue
+import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.realtime.Realtime
 import io.github.jan.supabase.serializer.KotlinXSerializer
 import kotlinx.serialization.json.Json
 
@@ -17,14 +18,11 @@ class SupabaseClient {
         defaultSerializer = KotlinXSerializer(Json {
             ignoreUnknownKeys = true
         })
-
-        install(GoTrue) {
-            jwtToken = BuildConfig.jwtToken
-        }
+        install(Auth)
+        install(Postgrest)
+        install(Realtime)
         install(ComposeAuth) {
             googleNativeLogin(serverClientId = BuildConfig.googleKey)
         }
-
-        install(Postgrest)
     }
 }

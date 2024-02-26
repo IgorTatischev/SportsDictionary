@@ -19,7 +19,6 @@ android {
         buildConfigField("String", "supabaseUrl", supabaseProperties.getProperty("supabaseUrl"))
         buildConfigField("String", "supabaseKey", supabaseProperties.getProperty("supabaseKey"))
         buildConfigField("String", "googleKey", supabaseProperties.getProperty("googleKey"))
-        buildConfigField("String", "jwtToken", supabaseProperties.getProperty("jwtToken"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

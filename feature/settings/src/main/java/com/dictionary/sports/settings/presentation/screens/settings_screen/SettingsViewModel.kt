@@ -88,17 +88,18 @@ class SettingsViewModel(
         }
     }
 
-    fun deleteUser() {
-        screenModelScope.launch(Dispatchers.IO) {
-            val result = supabaseRepository.deleteUser()
-
-            when (result) {
-                ChangeUserDataState.Success -> _uiEffect.emit(UiEffect.ShowSnackbar(R.string.success_delete_account))
-
-                ChangeUserDataState.Error -> _uiEffect.emit(UiEffect.ShowSnackbar(CoreRes.string.error))
-            }
-        }
-    }
+    //todo delete
+//    fun deleteUser() {
+//        screenModelScope.launch(Dispatchers.IO) {
+//            val result = supabaseRepository.deleteUser()
+//
+//            when (result) {
+//                ChangeUserDataState.Success -> _uiEffect.emit(UiEffect.ShowSnackbar(R.string.success_delete_account))
+//
+//                ChangeUserDataState.Error -> _uiEffect.emit(UiEffect.ShowSnackbar(CoreRes.string.error))
+//            }
+//        }
+//    }
 
     private fun getCurrentUserName() {
         screenModelScope.launch(Dispatchers.IO) {

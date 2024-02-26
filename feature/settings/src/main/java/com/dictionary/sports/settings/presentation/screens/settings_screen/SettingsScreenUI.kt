@@ -72,7 +72,8 @@ fun SettingsScreenUI(
         floatingActionButton = {
             AccountActionsButtons(
                 onDeleteAccountClick = {
-                    viewModel.deleteUser()
+                                       //todo delete
+                    //viewModel.deleteUser()
                 },
                 onSignInClick = {
                     navigateToSignInScreen()

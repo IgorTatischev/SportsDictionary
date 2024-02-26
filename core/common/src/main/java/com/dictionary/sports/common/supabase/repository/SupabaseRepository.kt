@@ -20,7 +20,7 @@ interface SupabaseRepository {
 
     suspend fun saveToken()
 
-    suspend fun deleteUser(): ChangeUserDataState
+    //suspend fun deleteUser(): ChangeUserDataState
 
     suspend fun getCurrentUserName(): String
 

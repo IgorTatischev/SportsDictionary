@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.dictionary.sports.authorization.R
 import com.dictionary.sports.authorization.presentation.sign_up_screen.viewmode.UiEffect
 import com.dictionary.sports.authorization.presentation.sign_up_screen.viewmode.AuthorizationViewModel
-import io.github.jan.supabase.compose.auth.composable.rememberLoginWithGoogle
+import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle
 import io.github.jan.supabase.compose.auth.composeAuth
 import kotlinx.coroutines.flow.collectLatest
 
@@ -42,7 +42,7 @@ fun GoogleSignInDisplay(
     val errorText = authorizationViewModel.signInState.collectAsState().value.googleAuthError
 
     val authState =
-        authorizationViewModel.supabaseClientFromVM.client.composeAuth.rememberLoginWithGoogle(
+        authorizationViewModel.supabaseClientFromVM.client.composeAuth.rememberSignInWithGoogle(
             onResult = { result ->
                 authorizationViewModel.loginWithGoogle(result)
             }
