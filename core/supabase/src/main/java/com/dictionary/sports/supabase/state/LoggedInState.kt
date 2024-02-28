@@ -1,4 +1,4 @@
-package com.dictionary.sports.common.supabase.state
+package com.dictionary.sports.supabase.state
 
 sealed class LoggedInState {
     object Error: LoggedInState()

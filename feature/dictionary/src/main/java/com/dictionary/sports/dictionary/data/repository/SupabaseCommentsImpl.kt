@@ -1,37 +1,53 @@
 package com.dictionary.sports.dictionary.data.repository
 
-import android.util.Log
-import com.dictionary.sports.common.supabase.SupabaseClient
 import com.dictionary.sports.dictionary.data.model.CommentEntity
 import com.dictionary.sports.dictionary.data.toEntity
 import com.dictionary.sports.dictionary.data.toComment
 import com.dictionary.sports.dictionary.domain.CommentsState
 import com.dictionary.sports.dictionary.domain.model.Comment
-import com.dictionary.sports.dictionary.domain.repository.SupabaseDBRepository
+import com.dictionary.sports.dictionary.domain.repository.SupabaseComments
 import com.dictionary.sports.resources.R
-import io.github.jan.supabase.gotrue.gotrue
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.annotations.SupabaseExperimental
+import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.postgrest
-import io.github.jan.supabase.postgrest.query.Order
+import io.github.jan.supabase.realtime.channel
+import io.github.jan.supabase.realtime.postgresListDataFlow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class SupabaseDBRepositoryImpl(
-    private val supabaseClient: SupabaseClient
-) : SupabaseDBRepository {
+@OptIn(SupabaseExperimental::class)
+class SupabaseCommentsImpl(
+    private val client: SupabaseClient
+) : SupabaseComments {
+
+    private val channel = client.channel("comments")
+
+    override suspend fun checkComments(): Flow<List<Comment>> = channel
+        .postgresListDataFlow(schema = "public", table = "comments", primaryKey = Comment::id)
+        .flowOn(Dispatchers.IO)
+
+    override suspend fun subChannel() {
+        channel.subscribe()
+    }
 
     override suspend fun getComments(filterValue: Int): List<Comment> {
-        return supabaseClient.client.postgrest
+        return client.postgrest
             .from("comments")
             .select(
-                filter = {
-                    isIn("comment_for", listOf(filterValue))
-                    order(
-                        column = "id",
-                        order = Order.DESCENDING
-                    )
-                }
+                //todo filter
+//                filter = {
+//                    isIn("comment_for", listOf(filterValue))
+//                    order(
+//                        column = "id",
+//                        order = Order.DESCENDING
+//                    )
+//                }
             )
             .decodeList<CommentEntity>()
             .map { it.toComment() }
@@ -45,7 +61,7 @@ class SupabaseDBRepositoryImpl(
             val sdf = SimpleDateFormat("d MMM HH:mm", Locale.getDefault())
             val currentDate = sdf.format(Date())
 
-            val currentUser = supabaseClient.client.gotrue.retrieveUserForCurrentSession()
+            val currentUser = client.auth.retrieveUserForCurrentSession()
 
             val userEmail = currentUser.email ?: ""
             var name = userEmail.substringBefore('@')
@@ -64,7 +80,7 @@ class SupabaseDBRepositoryImpl(
                 commentFor = commentFor
             )
 
-            supabaseClient.client.postgrest
+            client.postgrest
                 .from("comments")
                 .insert(comment.toEntity())
             return CommentsState.Success

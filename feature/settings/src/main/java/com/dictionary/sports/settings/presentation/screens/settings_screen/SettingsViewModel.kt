@@ -6,10 +6,9 @@ import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.dictionary.sports.common.datastore.DataStorePreferencesRepository
 import com.dictionary.sports.common.locale.AppLanguage
-import com.dictionary.sports.common.supabase.repository.SupabaseRepository
-import com.dictionary.sports.common.supabase.state.ChangeUserDataState
-import com.dictionary.sports.settings.R
-import com.dictionary.sports.settings.repository.ActionRepository
+import com.dictionary.sports.settings.repository.SupabaseProfile
+import com.dictionary.sports.settings.util.ActionService
+import com.dictionary.sports.supabase.repository.SupabaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,8 +22,9 @@ import com.dictionary.sports.resources.R as CoreRes
 
 class SettingsViewModel(
     private val dataStorePreferencesRepository: DataStorePreferencesRepository,
-    private val actionRepository: ActionRepository,
-    private val supabaseRepository: SupabaseRepository
+    private val actionService: ActionService,
+    private val supabaseRepository: SupabaseRepository,
+    private val supabaseProfile: SupabaseProfile
 ) : ScreenModel {
 
     private val _state = MutableStateFlow(SettingsScreenState())
@@ -32,9 +32,6 @@ class SettingsViewModel(
 
     private val _showDialog = MutableStateFlow(false)
     val showDialog = _showDialog.asStateFlow()
-
-    private val _userName = MutableStateFlow("")
-    val userName = _userName.asStateFlow()
 
     private val _uiEffect = MutableSharedFlow<UiEffect>()
     val uiEffect = _uiEffect.asSharedFlow()
@@ -55,7 +52,7 @@ class SettingsViewModel(
     fun openEmail() {
         screenModelScope.launch {
             try {
-                actionRepository.openEmail()
+                actionService.openEmail()
             } catch (exception: Exception) {
                 _uiEffect.emit(UiEffect.ShowSnackbar(CoreRes.string.error))
             }
@@ -65,7 +62,7 @@ class SettingsViewModel(
     fun openMarket() {
         screenModelScope.launch {
             try {
-                actionRepository.openMarket()
+                actionService.openMarket()
             } catch (exception: Exception) {
                 _uiEffect.emit(UiEffect.ShowSnackbar(CoreRes.string.error))
             }
@@ -103,20 +100,20 @@ class SettingsViewModel(
 
     private fun getCurrentUserName() {
         screenModelScope.launch(Dispatchers.IO) {
-            _userName.value = supabaseRepository.getCurrentUserName()
+            setUserName(supabaseRepository.getCurrentUserName())
         }
     }
 
-    fun changeUserName(newValue: String) {
-        _userName.value = newValue
-    }
+    fun setUserName(newValue: String) = _state.update { it.copy(userName = newValue) }
 
-    fun saveNewNameForUser(newName: String) {
-        screenModelScope.launch(Dispatchers.IO) {
-            when (supabaseRepository.saveNewNameForUser(newName = newName)) {
-                ChangeUserDataState.Success -> _uiEffect.emit(UiEffect.ShowSnackbar(R.string.success_name_change))
-                ChangeUserDataState.Error -> _userName.value = ""
-            }
-        }
-    }
+
+    //todo change name
+//    fun saveNewNameForUser(newName: String) {
+//        screenModelScope.launch(Dispatchers.IO) {
+//            when (supabaseRepository.saveNewNameForUser(newName = newName)) {
+//                ChangeUserDataState.Success -> _uiEffect.emit(UiEffect.ShowSnackbar(R.string.success_name_change))
+//                ChangeUserDataState.Error -> _userName.value = ""
+//            }
+//        }
+//    }
 }

@@ -36,7 +36,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreenUI(
+fun SettingsScreenUi(
     viewModel: SettingsViewModel,
     navigateBack: () -> Boolean,
     navigateToSignInScreen: () -> Unit,
@@ -56,8 +56,7 @@ fun SettingsScreenUI(
         viewModel.uiEffect.collectLatest { effect ->
             when (effect) {
                 is UiEffect.ShowSnackbar -> {
-                    snackbarHostState
-                        .showSnackbar(message = context.getString(effect.resId))
+                    snackbarHostState.showSnackbar(message = context.getString(effect.resId))
                 }
             }
         }
@@ -72,7 +71,7 @@ fun SettingsScreenUI(
         floatingActionButton = {
             AccountActionsButtons(
                 onDeleteAccountClick = {
-                                       //todo delete
+                    //todo delete
                     //viewModel.deleteUser()
                 },
                 onSignInClick = {

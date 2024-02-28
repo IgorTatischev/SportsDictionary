@@ -1,6 +1,7 @@
 package com.dictionary.sports.authorization.presentation.splash_screen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
@@ -21,7 +22,11 @@ class SplashScreen : Screen {
         val navigateToWelcomeScreen = { navigator.replaceAll(welcomeScreen) }
         val navigateToMenuScreen = { navigator.replaceAll(menuScreen) }
 
-        SplashScreenUI(
+        LaunchedEffect(true) {
+            splashViewModel.isUserLoggedIn()
+        }
+
+        SplashScreenUi(
             navigateToWelcomeScreen = navigateToWelcomeScreen,
             navigateToMenuScreen = navigateToMenuScreen,
             splashViewModel = splashViewModel

@@ -17,7 +17,7 @@ import com.dictionary.sports.settings.presentation.screens.settings_screen.Setti
 fun ChangeNameDialog(
     settingsViewModel: SettingsViewModel
 ) {
-    val userName = settingsViewModel.userName.collectAsState().value
+    val state = settingsViewModel.state.collectAsState().value
 
     AlertDialog(
         containerColor = MaterialTheme.colorScheme.background,
@@ -30,9 +30,9 @@ fun ChangeNameDialog(
         },
         text = {
             OutlinedTextField(
-                value = userName,
+                value = state.userName,
                 onValueChange = {
-                    settingsViewModel.changeUserName(it)
+                    settingsViewModel.setUserName(it)
                 },
                 shape = RoundedCornerShape(30),
                 singleLine = true,
@@ -45,7 +45,8 @@ fun ChangeNameDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    settingsViewModel.saveNewNameForUser(newName = userName)
+                    //todo change name
+                    //settingsViewModel.saveNewNameForUser(newName = userName)
                     settingsViewModel.setShowDialogFalse()
                 }
             ) {

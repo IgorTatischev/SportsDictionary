@@ -51,14 +51,9 @@ android {
 
 dependencies {
     implementation(libs.bundles.voyager)
-
     implementation(libs.kotlinx.json)
-    implementation(libs.supabasegoTrue)
-    implementation(libs.supabaseAuth)
-    implementation(libs.supabaseAuthUi)
-    implementation(libs.ktor.client.cio)
-    implementation(libs.play.services.auth)
-    implementation(libs.ktor.client.android)
+    implementation(libs.bundles.supabase)
+    implementation(libs.bundles.koin)
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -70,11 +65,10 @@ dependencies {
     implementation(libs.ui.tooling)
     implementation(libs.material3)
     implementation(libs.extended.icons)
-
     implementation(libs.androidx.window)
-    implementation(libs.bundles.koin)
 
     implementation(projects.core.resources)
     implementation(projects.core.common)
     implementation(projects.core.ui)
+    implementation(projects.core.supabase)
 }

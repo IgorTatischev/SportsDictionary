@@ -2,8 +2,8 @@ package com.dictionary.sports.dictionary.di
 
 import cafe.adriel.voyager.core.registry.screenModule
 import com.dictionary.sports.common.navigation.SharedScreen
-import com.dictionary.sports.dictionary.data.repository.SupabaseDBRepositoryImpl
-import com.dictionary.sports.dictionary.domain.repository.SupabaseDBRepository
+import com.dictionary.sports.dictionary.data.repository.SupabaseCommentsImpl
+import com.dictionary.sports.dictionary.domain.repository.SupabaseComments
 import com.dictionary.sports.dictionary.presentation.screens.comments_screen.CommentsScreen
 import com.dictionary.sports.dictionary.presentation.screens.sport_screen.SportDescriptionScreen
 import com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel.CommentsViewModel
@@ -15,7 +15,7 @@ object DictionaryModule {
     operator fun invoke() = module {
         factoryOf(::CommentsViewModel)
 
-        single<SupabaseDBRepository> { SupabaseDBRepositoryImpl(supabaseClient = get()) }
+        single<SupabaseComments> { SupabaseCommentsImpl(supabaseClient = get()) }
     }
 }
 

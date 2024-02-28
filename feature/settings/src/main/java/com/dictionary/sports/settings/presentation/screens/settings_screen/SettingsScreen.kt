@@ -20,7 +20,7 @@ class SettingsScreen : Screen {
         val navigateBack = { navigator.pop() }
         val navigateToSignInScreen = { navigator.push(registrationScreen) }
 
-        SettingsScreenUI(
+        SettingsScreenUi(
             viewModel = settingsViewModel,
             navigateBack = navigateBack,
             navigateToSignInScreen = navigateToSignInScreen

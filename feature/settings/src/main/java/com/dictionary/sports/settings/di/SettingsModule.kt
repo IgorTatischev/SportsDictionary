@@ -4,16 +4,20 @@ import cafe.adriel.voyager.core.registry.screenModule
 import com.dictionary.sports.common.navigation.SharedScreen
 import com.dictionary.sports.settings.presentation.screens.settings_screen.SettingsScreen
 import com.dictionary.sports.settings.presentation.screens.settings_screen.SettingsViewModel
-import com.dictionary.sports.settings.repository.ActionRepository
+import com.dictionary.sports.settings.repository.SupabaseProfile
+import com.dictionary.sports.settings.repository.SupabaseProfileImpl
+import com.dictionary.sports.settings.util.ActionService
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 object SettingsModule {
 
     operator fun invoke() = module {
         factoryOf(::SettingsViewModel)
-        singleOf(::ActionRepository)
+        singleOf(::ActionService)
+        singleOf(::SupabaseProfileImpl) bind SupabaseProfile::class
     }
 }
 

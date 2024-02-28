@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import com.dictionary.sports.common.locale.AppLanguage
 
 data class SettingsScreenState(
+    val userName: String = "",
     val selectedLanguages: String = AppLanguage.EN.name
 )
 

@@ -51,10 +51,10 @@ android {
 
 dependencies {
     implementation(libs.bundles.voyager)
-
+    implementation(libs.bundles.koin)
     implementation(libs.kotlinx.json)
-    implementation(libs.supabasePostgress)
-    implementation(libs.supabaseRealtime)
+    implementation(libs.supabase.postgress)
+    implementation(libs.supabase.realtime)
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -66,11 +66,10 @@ dependencies {
     implementation(libs.ui.tooling)
     implementation(libs.material3)
     implementation(libs.extended.icons)
-
     implementation(libs.androidx.window)
-    implementation(libs.bundles.koin)
 
     implementation(projects.core.resources)
     implementation(projects.core.common)
     implementation(projects.core.ui)
+    implementation(projects.core.supabase)
 }

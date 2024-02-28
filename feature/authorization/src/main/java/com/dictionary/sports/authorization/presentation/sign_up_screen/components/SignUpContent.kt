@@ -34,7 +34,7 @@ fun SignUpContent(
 
             SignUpButton(
                 action = {
-                    authorizationViewModel.login(
+                    authorizationViewModel.signIn(
                         navigateToScreen = navigateToMenuScreen
                     )
                 },

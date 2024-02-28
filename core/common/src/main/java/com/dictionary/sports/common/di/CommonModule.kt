@@ -4,9 +4,6 @@ import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
 import com.dictionary.sports.common.datastore.DataStorePreferencesRepository
 import com.dictionary.sports.common.datastore.DataStorePreferencesRepositoryImpl
-import com.dictionary.sports.common.supabase.SupabaseClient
-import com.dictionary.sports.common.supabase.repository.SupabaseRepository
-import com.dictionary.sports.common.supabase.repository.SupabaseRepositoryImpl
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.ExperimentalSettingsImplementation
 import com.russhwolf.settings.coroutines.FlowSettings
@@ -22,8 +19,6 @@ object CommonModule {
     operator fun invoke() = module {
         single { createSettings() }
         singleOf(::DataStorePreferencesRepositoryImpl) bind DataStorePreferencesRepository::class
-        singleOf(::SupabaseRepositoryImpl) bind SupabaseRepository::class
-        singleOf(::SupabaseClient)
     }
 }
 

@@ -19,7 +19,7 @@ import com.dictionary.sports.ui.components.backgroundGradient
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommentsScreenUI(
+fun CommentsScreenUi(
     filterValue: Int,
     commentsViewModel: CommentsViewModel,
     navigateBack: () -> Unit,

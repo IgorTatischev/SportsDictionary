@@ -2,16 +2,15 @@
 app-id = "com.dictionary.sports.terms"
 base-id = "com.dictionary.sports."
 
-network="network"
-resources="resources"
-common="common"
-ui="ui"
-main="main"
-aso="aso"
-
-dictionary="dictionary"
-authorization="authorization"
-settings="settings"
+network = "network"
+resources = "resources"
+common = "common"
+ui = "ui"
+main = "main"
+supabase = "supabase"
+dictionary = "dictionary"
+authorization = "authorization"
+settings = "settings"
 
 version-code = "1"
 version-name = "1.0."
@@ -96,7 +95,7 @@ compose-foundation = { group = "androidx.compose.foundation", name = "foundation
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 extended-icons = { module = "androidx.compose.material:material-icons-extended" }
-lottie = {module = "com.airbnb.android:lottie-compose", version.ref = "lottie"}
+lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 google-services = { module = "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin", version.ref = "google-services" }
 accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
@@ -134,11 +133,11 @@ multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-sett
 orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbit-compose" }
 orbit-viewmodel = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbit-viewmodel" }
 
-supabasegoTrue = { module = "io.github.jan-tennert.supabase:gotrue-kt", version.ref = "supabaseVersion" }
-supabaseAuth = { module = "io.github.jan-tennert.supabase:compose-auth", version.ref = "supabaseVersion" }
-supabaseAuthUi = { module = "io.github.jan-tennert.supabase:compose-auth-ui", version.ref = "supabaseVersion" }
-supabasePostgress = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "supabaseVersion" }
-supabaseRealtime = { module = "io.github.jan-tennert.supabase:realtime-kt", version.ref = "supabaseVersion" }
+supabase-gotrue = { module = "io.github.jan-tennert.supabase:gotrue-kt", version.ref = "supabaseVersion" }
+supabase-auth = { module = "io.github.jan-tennert.supabase:compose-auth", version.ref = "supabaseVersion" }
+supabase-auth-ui = { module = "io.github.jan-tennert.supabase:compose-auth-ui", version.ref = "supabaseVersion" }
+supabase-postgress = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "supabaseVersion" }
+supabase-realtime = { module = "io.github.jan-tennert.supabase:realtime-kt", version.ref = "supabaseVersion" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesVersion" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorVersion" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorVersion" }
@@ -159,3 +158,4 @@ datastore-full = ["datastore", "datastore-proto"]
 retrofit-with-okhttp = ["retrofit", "retrofit-converter-gson", "okhttp", "okhttp-logging-interceptor"]
 voyager = ["voyager-koin", "voyager-navigation", "voyager-transition", "voyager-screenmodel"]
 settings = ["multiplatform-settings", "multiplatform-settings-coroutines", "multiplatform-settings-datastore"]
+supabase = ["supabase-gotrue", "supabase-auth", "supabase-auth-ui", "supabase-postgress", "supabase-realtime", "play-services-auth", "ktor-client-android", "ktor-client-cio"]

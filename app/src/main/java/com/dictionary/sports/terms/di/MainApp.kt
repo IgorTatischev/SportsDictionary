@@ -8,6 +8,7 @@ import com.dictionary.sports.dictionary.di.DictionaryModule
 import com.dictionary.sports.dictionary.di.dictionaryScreenModule
 import com.dictionary.sports.settings.di.SettingsModule
 import com.dictionary.sports.settings.di.settingsScreenModule
+import com.dictionary.sports.supabase.di.SupabaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -32,6 +33,7 @@ class MainApp : Application() {
                     DictionaryModule(),
                     SettingsModule(),
                     CommonModule(),
+                    SupabaseModule(),
                 )
             )
         }

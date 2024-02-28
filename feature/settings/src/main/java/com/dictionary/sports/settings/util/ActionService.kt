@@ -1,11 +1,11 @@
-package com.dictionary.sports.settings.repository
+package com.dictionary.sports.settings.util
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.dictionary.sports.settings.R
 
-class ActionRepository(private val context: Context) {
+class ActionService(private val context: Context) {
 
     fun openEmail() {
         val emailAddress = arrayOf(email)

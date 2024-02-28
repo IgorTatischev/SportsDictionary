@@ -84,6 +84,7 @@ dependencies {
 
     implementation(projects.core.ui)
     implementation(projects.core.common)
+    implementation(projects.core.supabase)
     implementation(projects.feature.authorization)
     implementation(projects.feature.dictionary)
     implementation(projects.feature.settings)

@@ -20,10 +20,8 @@ fun BoxScope.CommentsDisplay(
 ) {
     val commentState = commentsViewModel.commentsFeatureState.collectAsState().value.commentState
 
-    LaunchedEffect(key1 = Unit) {
-        commentsViewModel.isUserLoggedIn()
+    LaunchedEffect(Unit) {
         commentsViewModel.getComments(filterValue = filterValue)
-        commentsViewModel.isUserLoggedIn()
     }
 
     when (commentState) {

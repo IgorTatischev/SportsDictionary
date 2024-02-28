@@ -1,17 +1,16 @@
 package com.dictionary.sports.authorization.presentation.splash_screen
 
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.runtime.mutableStateOf
 import androidx.core.os.LocaleListCompat
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.dictionary.sports.common.datastore.DataStorePreferencesRepository
 import com.dictionary.sports.common.locale.AppLanguage
-import com.dictionary.sports.common.supabase.repository.SupabaseRepository
-import com.dictionary.sports.common.supabase.state.LoggedInState
+import com.dictionary.sports.supabase.repository.SupabaseRepository
+import com.dictionary.sports.supabase.state.LoggedInState
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -22,10 +21,11 @@ class SplashViewModel(
     private val dataStorePreferencesRepository: DataStorePreferencesRepository,
     private val supabaseRepository: SupabaseRepository
 ) : ScreenModel {
-    private val token = mutableStateOf("")
 
-    private val _loginState = MutableStateFlow<LogInState>(LogInState.NotLogged)
-    val loginState: StateFlow<LogInState> = _loginState
+    private var token = ""
+
+    private val _sideEffect = MutableSharedFlow<SplashScreenSideEffect>()
+    val sideEffect = _sideEffect.asSharedFlow()
 
     init {
         setLanguage()
@@ -34,18 +34,23 @@ class SplashViewModel(
 
     fun isUserLoggedIn() {
         screenModelScope.launch(Dispatchers.IO) {
-            val result = supabaseRepository.isUserLoggedIn(token.value)
-            when {
-                result is LoggedInState.Success -> if (result.isLoggedIn) _loginState.value =
-                    LogInState.Logged
-                else _loginState.value = LogInState.NotLogged
+            when (val result = supabaseRepository.isUserLoggedIn(token)) {
+                is LoggedInState.Error -> {
+                    //todo error
+                }
+                is LoggedInState.Success -> {
+                    if(result.isLoggedIn)
+                        _sideEffect.emit(SplashScreenSideEffect.MoveToMenu)
+                    else
+                        _sideEffect.emit(SplashScreenSideEffect.MoveToAuth)
+                }
             }
         }
     }
 
     private fun getToken() {
         dataStorePreferencesRepository.getToken().onEach {
-            token.value = it
+            token = it
         }.launchIn(screenModelScope)
     }
 
