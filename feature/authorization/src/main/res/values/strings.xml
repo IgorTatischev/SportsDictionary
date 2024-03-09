@@ -1,26 +1,19 @@
 <resources>
     <string name="button_sign_up">Sign up</string>
-    <string name="button_log_in">Log in</string>
-
-    # Sign up screen
+    <string name="button_sign_in">Sign in</string>
     <string name="header_title_text">Sign up</string>
     <string name="header_description_text">Sign up to leave comments\nand save liked content</string>
-
     <string name="label_login">Email</string>
     <string name="label_password">Password</string>
     <string name="label_show">Show</string>
     <string name="label_hide">Hide</string>
-
     <string name="text_sign_variant">Or sign in with</string>
-
-    # Messages for sign up + log in
-    <string name="empty"></string>
-
     <string name="network_error">Network error occurred. Please check your connection</string>
     <string name="error">Some error occurred</string>
+    <string name="login_error">Some error occurred! Check login data!</string>
 
-    # Welcome screen
+    # Welcome Screen
     <string name="welcome_header_text">Welcome to\nsports glossary</string>
-    <string name="welcome_description_text">Let’z play the quiz everytime\nand everywhere</string>
+    <string name="welcome_description_text">Let’s play the quiz everytime\nand everywhere</string>
     <string name="button_skip">Skip</string>
 </resources>

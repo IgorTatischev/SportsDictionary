@@ -1,12 +1,14 @@
 package com.dictionary.sports.settings.presentation.screens.settings_screen
 
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.dictionary.sports.common.datastore.DataStorePreferencesRepository
 import com.dictionary.sports.common.locale.AppLanguage
-import com.dictionary.sports.settings.repository.SupabaseProfile
+import com.dictionary.sports.settings.R
+import com.dictionary.sports.settings.domain.SupabaseProfile
 import com.dictionary.sports.settings.util.ActionService
 import com.dictionary.sports.supabase.repository.SupabaseRepository
 import kotlinx.coroutines.Dispatchers
@@ -23,15 +25,11 @@ import com.dictionary.sports.resources.R as CoreRes
 class SettingsViewModel(
     private val dataStorePreferencesRepository: DataStorePreferencesRepository,
     private val actionService: ActionService,
-    private val supabaseRepository: SupabaseRepository,
-    private val supabaseProfile: SupabaseProfile
+    private val supabaseProfile: SupabaseProfile,
 ) : ScreenModel {
 
     private val _state = MutableStateFlow(SettingsScreenState())
     val state = _state.asStateFlow()
-
-    private val _showDialog = MutableStateFlow(false)
-    val showDialog = _showDialog.asStateFlow()
 
     private val _uiEffect = MutableSharedFlow<UiEffect>()
     val uiEffect = _uiEffect.asSharedFlow()
@@ -40,13 +38,12 @@ class SettingsViewModel(
         getLanguage()
     }
 
-    fun setShowDialogTrue() {
-        getCurrentUserName()
-        _showDialog.value = true
+    fun showDialog() {
+        getProfile()
     }
 
-    fun setShowDialogFalse() {
-        _showDialog.value = false
+    fun dialogDismiss() {
+        _state.update { it.copy(showDialog = false) }
     }
 
     fun openEmail() {
@@ -86,34 +83,48 @@ class SettingsViewModel(
     }
 
     //todo delete
-//    fun deleteUser() {
-//        screenModelScope.launch(Dispatchers.IO) {
-//            val result = supabaseRepository.deleteUser()
-//
-//            when (result) {
-//                ChangeUserDataState.Success -> _uiEffect.emit(UiEffect.ShowSnackbar(R.string.success_delete_account))
-//
-//                ChangeUserDataState.Error -> _uiEffect.emit(UiEffect.ShowSnackbar(CoreRes.string.error))
-//            }
-//        }
-//    }
-
-    private fun getCurrentUserName() {
+    fun deleteUser() {
         screenModelScope.launch(Dispatchers.IO) {
-            setUserName(supabaseRepository.getCurrentUserName())
+            TODO()
         }
     }
 
-    fun setUserName(newValue: String) = _state.update { it.copy(userName = newValue) }
+    fun signOut() = screenModelScope.launch { supabaseProfile.signOut() }
 
+    fun setLogin(newValue: String) = _state.update { it.copy(loginText = newValue) }
+    fun setPassword(newValue: String) = _state.update { it.copy(passwordText = newValue) }
+    fun setUserName(newValue: String) = _state.update { it.copy(nameText = newValue) }
 
-    //todo change name
-//    fun saveNewNameForUser(newName: String) {
-//        screenModelScope.launch(Dispatchers.IO) {
-//            when (supabaseRepository.saveNewNameForUser(newName = newName)) {
-//                ChangeUserDataState.Success -> _uiEffect.emit(UiEffect.ShowSnackbar(R.string.success_name_change))
-//                ChangeUserDataState.Error -> _userName.value = ""
-//            }
-//        }
-//    }
+    private fun getProfile() {
+        screenModelScope.launch(Dispatchers.IO) {
+            supabaseProfile.getUserData()
+                .onSuccess { profile ->
+                    _state.update {
+                        it.copy(
+                            loginText = profile.email,
+                            nameText = profile.name,
+                            passwordText = "",
+                            showDialog = true
+                        )
+                    }
+                }
+                .onFailure {
+                    _state.update { it.copy(showDialog = false) }
+                    _uiEffect.emit(UiEffect.ShowSnackbar(CoreRes.string.error))
+                }
+        }
+    }
+
+    fun changeData() = with(_state.value) {
+        screenModelScope.launch(Dispatchers.IO) {
+            supabaseProfile.changeUserData(
+                login = loginText,
+                userPassword = passwordText,
+                name = nameText,
+            ).onFailure {
+                _state.update { it.copy(showDialog = false) }
+                _uiEffect.emit(UiEffect.ShowSnackbar(CoreRes.string.error))
+            }
+        }
+    }
 }

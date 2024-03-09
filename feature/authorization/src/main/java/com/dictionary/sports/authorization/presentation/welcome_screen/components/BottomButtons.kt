@@ -22,7 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dictionary.sports.authorization.R
-import com.dictionary.sports.authorization.presentation.sign_up_screen.components.SignUpButton
+import com.dictionary.sports.authorization.presentation.auth_screen.components.AuthButton
 import com.dictionary.sports.ui.theme.grayBlueButtonColor
 
 @Composable
@@ -35,7 +35,7 @@ fun BottomButtons(
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        SignUpButton(action = navigateToRegistrationScreen)
+        AuthButton(action = navigateToRegistrationScreen)
 
         Box(
             modifier = Modifier

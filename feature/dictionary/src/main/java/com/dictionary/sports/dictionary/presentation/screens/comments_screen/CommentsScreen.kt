@@ -1,13 +1,13 @@
 package com.dictionary.sports.dictionary.presentation.screens.comments_screen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel.CommentsViewModel
-
 
 data class CommentsScreen(val filterValue: Int) : Screen {
     @Composable
@@ -16,14 +16,18 @@ data class CommentsScreen(val filterValue: Int) : Screen {
         val commentsViewModel = getScreenModel<CommentsViewModel>()
         val navigator = LocalNavigator.currentOrThrow
 
-        LaunchedEffect(true) {
+        LaunchedEffect(Unit) {
             commentsViewModel.isUserLoggedIn()
         }
 
-        CommentsScreenUi(
+        CommentsScreenContent(
             filterValue = filterValue,
             commentsViewModel = commentsViewModel,
             navigateBack = { navigator.pop() }
         )
+
+        DisposableEffect(Unit) {
+            onDispose { commentsViewModel.leaveComments() }
+        }
     }
 }

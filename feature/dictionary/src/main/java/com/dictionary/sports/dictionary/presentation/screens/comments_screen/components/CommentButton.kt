@@ -19,15 +19,10 @@ import com.dictionary.sports.dictionary.R
 import com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel.CommentsViewModel
 
 @Composable
-fun CommentButton(
-    commentsViewModel: CommentsViewModel,
-    filterValue: Int
-) {
+fun CommentButton(onClick: () -> Unit) {
     Button(
         modifier = Modifier.padding(bottom = 6.dp),
-        onClick = {
-            commentsViewModel.createComment(filterValue = filterValue)
-        },
+        onClick = onClick,
         shape = RoundedCornerShape(50),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.onPrimary,

@@ -30,7 +30,7 @@ class MenuScreen : Screen {
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
-        MenuScreenUI(
+        MenuScreenContent(
             navigateToSettings = navigateToSettingsScreen,
             navigateToSportScreen = navigateToSportScreen,
         )

@@ -15,7 +15,7 @@ class SettingsScreen : Screen {
         val settingsViewModel = getScreenModel<SettingsViewModel>()
 
         val navigator = LocalNavigator.currentOrThrow
-        val registrationScreen = rememberScreen(SharedScreen.Register)
+        val registrationScreen = rememberScreen(SharedScreen.Auth)
 
         val navigateBack = { navigator.pop() }
         val navigateToSignInScreen = { navigator.push(registrationScreen) }

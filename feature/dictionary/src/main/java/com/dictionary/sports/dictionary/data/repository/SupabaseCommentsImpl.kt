@@ -1,92 +1,89 @@
 package com.dictionary.sports.dictionary.data.repository
 
 import com.dictionary.sports.dictionary.data.model.CommentEntity
-import com.dictionary.sports.dictionary.data.toEntity
 import com.dictionary.sports.dictionary.data.toComment
-import com.dictionary.sports.dictionary.domain.CommentsState
+import com.dictionary.sports.dictionary.data.toEntity
 import com.dictionary.sports.dictionary.domain.model.Comment
 import com.dictionary.sports.dictionary.domain.repository.SupabaseComments
-import com.dictionary.sports.resources.R
+import com.dictionary.sports.supabase.repository.SupabaseRepository
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.gotrue.auth
+import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.query.Order
+import io.github.jan.supabase.postgrest.query.filter.FilterOperation
+import io.github.jan.supabase.postgrest.query.filter.FilterOperator
 import io.github.jan.supabase.realtime.channel
 import io.github.jan.supabase.realtime.postgresListDataFlow
+import io.github.jan.supabase.realtime.realtime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+
 @OptIn(SupabaseExperimental::class)
 class SupabaseCommentsImpl(
-    private val client: SupabaseClient
+    private val client: SupabaseClient,
+    private val supabaseRepository: SupabaseRepository,
 ) : SupabaseComments {
 
     private val channel = client.channel("comments")
 
-    override suspend fun checkComments(): Flow<List<Comment>> = channel
-        .postgresListDataFlow(schema = "public", table = "comments", primaryKey = Comment::id)
-        .flowOn(Dispatchers.IO)
+    override suspend fun getComments(filterValue: Int): Result<Flow<List<Comment>>> = runCatching {
+        val data = channel.postgresListDataFlow(
+            schema = "public",
+            table = "comments",
+            primaryKey = CommentEntity::id,
+            filter = FilterOperation(
+                column = "comment_for",
+                operator = FilterOperator.EQ,
+                value = filterValue
+            ),
+        ).flowOn(Dispatchers.IO)
 
-    override suspend fun subChannel() {
         channel.subscribe()
-    }
 
-    override suspend fun getComments(filterValue: Int): List<Comment> {
-        return client.postgrest
-            .from("comments")
-            .select(
-                //todo filter
-//                filter = {
-//                    isIn("comment_for", listOf(filterValue))
-//                    order(
-//                        column = "id",
-//                        order = Order.DESCENDING
-//                    )
-//                }
-            )
-            .decodeList<CommentEntity>()
-            .map { it.toComment() }
+        val flow = data.map { list ->
+            list.map { comment ->
+                comment.toComment()
+            }.reversed()
+        }
+
+        return Result.success(flow)
     }
 
     override suspend fun createComment(
         commentText: String,
-        commentFor: Int
-    ): CommentsState {
-        try {
-            val sdf = SimpleDateFormat("d MMM HH:mm", Locale.getDefault())
-            val currentDate = sdf.format(Date())
+        commentFor: Int,
+    ): Result<Unit> = runCatching {
 
-            val currentUser = client.auth.retrieveUserForCurrentSession()
+        val sdf = SimpleDateFormat("d MMM HH:mm", Locale.getDefault())
+        val currentDate = sdf.format(Date())
+        val uuid = client.auth.retrieveUserForCurrentSession().id
+        val name = supabaseRepository.getCurrentUserName()
 
-            val userEmail = currentUser.email ?: ""
-            var name = userEmail.substringBefore('@')
-            val uuid = currentUser.id
+        val comment = Comment(
+            createdAt = currentDate.toString(),
+            userId = uuid,
+            userName = name,
+            commentText = commentText,
+            commentFor = commentFor
+        )
 
-            currentUser.userMetadata?.let {
-                val jsonObject = JSONObject(it.toString())
-                name = jsonObject.getString("name")
-            }
-
-            val comment = Comment(
-                createdAt = currentDate.toString(),
-                userId = uuid,
-                userName = name,
-                commentText = commentText,
-                commentFor = commentFor
-            )
-
-            client.postgrest
-                .from("comments")
-                .insert(comment.toEntity())
-            return CommentsState.Success
-
-        } catch (e: Exception) {
-            return CommentsState.Error(R.string.error)
-        }
+        client.postgrest
+            .from("comments")
+            .insert(comment.toEntity())
     }
+
+    override suspend fun leaveChannel() {
+        channel.unsubscribe()
+        client.realtime.removeChannel(channel)
+    }
+
 }

@@ -64,7 +64,7 @@ gson = "2.10"
 voyager = "1.0.0"
 lottie = "5.0.3"
 supabaseVersion = "2.1.5"
-ktorVersion = "2.3.4"
+ktorVersion = "2.3.8"
 playServicesVersion = "20.7.0"
 multiplatformSettings = "1.1.1"
 
@@ -158,4 +158,4 @@ datastore-full = ["datastore", "datastore-proto"]
 retrofit-with-okhttp = ["retrofit", "retrofit-converter-gson", "okhttp", "okhttp-logging-interceptor"]
 voyager = ["voyager-koin", "voyager-navigation", "voyager-transition", "voyager-screenmodel"]
 settings = ["multiplatform-settings", "multiplatform-settings-coroutines", "multiplatform-settings-datastore"]
-supabase = ["supabase-gotrue", "supabase-auth", "supabase-auth-ui", "supabase-postgress", "supabase-realtime", "play-services-auth", "ktor-client-android", "ktor-client-cio"]
+supabase = ["supabase-gotrue", "supabase-auth", "supabase-auth-ui", "supabase-postgress", "supabase-realtime", "play-services-auth", "ktor-client-cio"]

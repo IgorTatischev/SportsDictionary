@@ -53,8 +53,7 @@ dependencies {
     implementation(libs.bundles.voyager)
     implementation(libs.bundles.koin)
     implementation(libs.kotlinx.json)
-    implementation(libs.supabase.postgress)
-    implementation(libs.supabase.realtime)
+    implementation(libs.bundles.supabase)
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)

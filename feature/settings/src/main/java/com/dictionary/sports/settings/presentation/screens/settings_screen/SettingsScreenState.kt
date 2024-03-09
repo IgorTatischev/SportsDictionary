@@ -4,8 +4,11 @@ import androidx.annotation.StringRes
 import com.dictionary.sports.common.locale.AppLanguage
 
 data class SettingsScreenState(
-    val userName: String = "",
-    val selectedLanguages: String = AppLanguage.EN.name
+    val nameText: String = "",
+    val loginText: String = "",
+    val passwordText: String = "",
+    val selectedLanguages: String = AppLanguage.EN.name,
+    val showDialog: Boolean = false
 )
 
 sealed class UiEffect {

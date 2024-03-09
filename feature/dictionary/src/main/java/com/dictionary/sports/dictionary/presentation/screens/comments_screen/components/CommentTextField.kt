@@ -23,14 +23,14 @@ import com.dictionary.sports.dictionary.presentation.screens.comments_screen.vie
 
 @Composable
 fun CommentTextField(
-    commentsViewModel: CommentsViewModel
+    value: String,
+    onValueChange: (String) -> Unit
 ) {
-    val commentText = commentsViewModel.commentsFeatureState.collectAsState().value.commentText
 
     BasicTextField(
         modifier = Modifier.padding(top = 20.dp),
-        value = commentText,
-        onValueChange = { commentsViewModel.changeCommentText(newValue = it) },
+        value = value,
+        onValueChange = onValueChange,
         singleLine = true,
         decorationBox = { innerTextField ->
             Box(
@@ -50,7 +50,7 @@ fun CommentTextField(
             ) {
                 innerTextField()
 
-                if (commentText.isEmpty())
+                if (value.isEmpty())
                     Text(
                         modifier = Modifier.align(Alignment.CenterStart),
                         text = stringResource(id = R.string.comment_label),

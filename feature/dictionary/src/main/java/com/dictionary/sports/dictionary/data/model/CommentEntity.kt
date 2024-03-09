@@ -3,7 +3,6 @@ package com.dictionary.sports.dictionary.data.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 data class CommentEntity(
 

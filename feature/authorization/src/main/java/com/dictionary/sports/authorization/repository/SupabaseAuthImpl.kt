@@ -18,7 +18,7 @@ class SupabaseAuthImpl(
         userPassword: String,
     ): Result<Unit> = runCatching {
 
-        val name = supabaseRepository.getCurrentUserName()
+        val name = userLogin.substringBefore('@')
 
         client.auth.signUpWith(provider = Email) {
             email = userLogin.trim()
@@ -49,6 +49,5 @@ class SupabaseAuthImpl(
         }
         supabaseRepository.saveToken()
         navigateToScreen()
-
     }
 }

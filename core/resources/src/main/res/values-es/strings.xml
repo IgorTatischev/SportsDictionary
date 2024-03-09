@@ -1,8 +1,5 @@
 <resources>
-    <string name="sign_up_success">El registro se realizó correctamente</string>
-    <string name="log_in_success">El inicio de sesión se realizó correctamente</string>
-    <string name="error">Se produjo algún error</string>
-
+    <string name="error">Se produjo algún error!</string>
     <string name="sports">Deportes</string>
     <string name="football">Fútbol</string>
     <string name="tennis">Tenis</string>

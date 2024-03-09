@@ -16,7 +16,7 @@ data class SportDescriptionScreen(val item: Sports) : Screen {
         val navigateToCommentsScreen: (Int) -> Unit =
             { navigator.push(CommentsScreen(filterValue = it)) }
 
-        SportDescriptionScreenUI(
+        SportDescriptionScreenContent(
             item = item,
             navigateBack = { navigator.pop() },
             navigateToComments = navigateToCommentsScreen

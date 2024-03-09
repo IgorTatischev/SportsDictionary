@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.serizliation)
 }
 
 android {
@@ -54,7 +55,7 @@ dependencies {
     implementation(libs.bundles.supabase)
     implementation(libs.bundles.koin)
     implementation(libs.bundles.orbit)
-
+    implementation(libs.kotlinx.json)
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)

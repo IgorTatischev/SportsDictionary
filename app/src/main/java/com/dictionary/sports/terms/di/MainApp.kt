@@ -2,6 +2,7 @@ package com.dictionary.sports.terms.di
 
 import android.app.Application
 import cafe.adriel.voyager.core.registry.ScreenRegistry
+import com.dictionary.sports.authorization.di.AuthorizationModule
 import com.dictionary.sports.authorization.di.authScreenModule
 import com.dictionary.sports.common.di.CommonModule
 import com.dictionary.sports.dictionary.di.DictionaryModule
@@ -29,7 +30,7 @@ class MainApp : Application() {
             androidLogger()
             modules(
                 listOf(
-                    com.dictionary.sports.authorization.di.AuthorizationModule(),
+                    AuthorizationModule(),
                     DictionaryModule(),
                     SettingsModule(),
                     CommonModule(),

@@ -43,11 +43,9 @@ fun SettingsScreenUi(
 ) {
     val context = LocalContext.current
     val state = viewModel.state.collectAsState().value
-
-    val showDialog = viewModel.showDialog.collectAsState().value
     val snackbarHostState = remember { SnackbarHostState() }
 
-    if (showDialog)
+    if (state.showDialog)
         ChangeNameDialog(
             settingsViewModel = viewModel
         )
@@ -71,10 +69,11 @@ fun SettingsScreenUi(
         floatingActionButton = {
             AccountActionsButtons(
                 onDeleteAccountClick = {
-                    //todo delete
-                    //viewModel.deleteUser()
+                    viewModel.deleteUser()
+                    navigateToSignInScreen()
                 },
                 onSignInClick = {
+                    viewModel.signOut()
                     navigateToSignInScreen()
                 }
             )
@@ -102,7 +101,7 @@ fun SettingsScreenUi(
             }
 
             SettingsButton(text = stringResource(id = R.string.change_name)) {
-                viewModel.setShowDialogTrue()
+                viewModel.showDialog()
             }
 
             Text(

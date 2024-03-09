@@ -19,20 +19,17 @@ internal class SupabaseRepositoryImpl(
     }
 
     override suspend fun getCurrentUserName(): String {
-        return try {
-            val currentUser = client.auth.retrieveUserForCurrentSession()
 
-            val userEmail = currentUser.email ?: ""
-            var name = userEmail.substringBefore('@')
+        val user = client.auth.retrieveUserForCurrentSession()
+        val userEmail = user.email ?: ""
+        var name = userEmail.substringBefore('@')
 
-            currentUser.userMetadata?.let {
-                val jsonObject = JSONObject(it.toString())
-                name = jsonObject.getString("name")
-            }
-            name
-        } catch (e: Exception) {
-            ""
+        user.userMetadata?.let {
+            val jsonObject = JSONObject(it.toString())
+            name = jsonObject.getString("name")
         }
+
+        return name
     }
 
     override suspend fun isUserLoggedIn(token: String): LoggedInState {
@@ -46,7 +43,7 @@ internal class SupabaseRepositoryImpl(
                 LoggedInState.Success(isLoggedIn = false)
             }
         } catch (e: Exception) {
-            LoggedInState.Error
+            LoggedInState.Error(message = e.message.orEmpty())
         }
     }
 }

@@ -2,9 +2,12 @@
     <string name="english">English</string>
     <string name="spanish">Español</string>
 
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
     <string name="delete">Delete Account</string>
     <string name="success_delete_account">Account deleted</string>
-    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
     <string name="write_us">Write Us</string>
     <string name="rate_us">Rate Us</string>
     <string name="change_name">Change name</string>

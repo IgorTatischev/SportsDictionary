@@ -1,5 +1,6 @@
 package com.dictionary.sports.authorization.presentation.splash_screen
 
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import cafe.adriel.voyager.core.model.ScreenModel
@@ -32,11 +33,11 @@ class SplashViewModel(
         getToken()
     }
 
-    fun isUserLoggedIn() {
+     fun isUserLoggedIn() {
         screenModelScope.launch(Dispatchers.IO) {
             when (val result = supabaseRepository.isUserLoggedIn(token)) {
                 is LoggedInState.Error -> {
-                    //todo error
+                    _sideEffect.emit(SplashScreenSideEffect.MoveToAuth)
                 }
                 is LoggedInState.Success -> {
                     if(result.isLoggedIn)
