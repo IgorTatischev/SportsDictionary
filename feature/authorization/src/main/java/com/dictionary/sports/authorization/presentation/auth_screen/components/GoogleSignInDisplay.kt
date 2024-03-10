@@ -9,8 +9,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,22 +17,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dictionary.sports.authorization.R
-import com.dictionary.sports.authorization.presentation.auth_screen.viewmodel.UiEffect
 import com.dictionary.sports.authorization.presentation.auth_screen.viewmodel.AuthorizationViewModel
-import kotlinx.coroutines.flow.collectLatest
+import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle
+import io.github.jan.supabase.compose.auth.composeAuth
 
 @Composable
 fun GoogleSignInDisplay(
-    authorizationViewModel: AuthorizationViewModel
+    screenModel: AuthorizationViewModel,
 ) {
 
-    //todo
-//    val authState =
-//        authorizationViewModel.supabaseClientFromVM.client.composeAuth.rememberSignInWithGoogle(
-//            onResult = { result ->
-//                authorizationViewModel.loginWithGoogle(result)
-//            }
-//        )
+    val authState = screenModel.googleClient.composeAuth.rememberSignInWithGoogle(
+        onResult = { result ->
+            screenModel.loginWithGoogle(result)
+        }
+    )
 
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -52,7 +48,7 @@ fun GoogleSignInDisplay(
                 .size(45.dp)
                 .clip(shape = RoundedCornerShape(50))
                 .clickable {
-                    //authState.startFlow()
+                    authState.startFlow()
                 },
             painter = painterResource(id = R.drawable.google_icon),
             contentDescription = null

@@ -1,6 +1,5 @@
 package com.dictionary.sports.authorization.presentation.auth_screen.viewmodel
 
-import android.util.Log
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.dictionary.sports.authorization.R
@@ -17,18 +16,18 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class AuthorizationViewModel(
-    private val client: SupabaseClient,
     private val auth: SupabaseAuth,
-    private val supabaseRepository: SupabaseRepository
+    private val supabaseRepository: SupabaseRepository,
+    client: SupabaseClient,
 ) : ScreenModel {
-    //TODO GOOGLE AUTH
+
     private val _signInState = MutableStateFlow(AuthScreenState())
     val signInState = _signInState.asStateFlow()
 
     private val _uiEffect = MutableSharedFlow<UiEffect>()
     val uiEffect = _uiEffect.asSharedFlow()
 
-    //val supabaseClientFromVM = client
+    val googleClient = client
 
     fun changeLoginText(newValue: String) {
         _signInState.update { it.copy(loginText = newValue) }
@@ -63,21 +62,24 @@ class AuthorizationViewModel(
     }
 
     fun loginWithGoogle(result: NativeSignInResult) {
-        when (result) {
-            is NativeSignInResult.Success -> {
-                screenModelScope.launch(Dispatchers.IO) {
-                     supabaseRepository.saveToken()
-                    _uiEffect.emit(UiEffect.NavigateToMenuScreen)
-                }
-            }
+       screenModelScope.launch {
+           when (result) {
+               is NativeSignInResult.Success -> {
+                   screenModelScope.launch(Dispatchers.IO) {
+                       supabaseRepository.saveToken()
+                       _uiEffect.emit(UiEffect.NavigateToMenuScreen)
+                   }
+               }
 
-            is NativeSignInResult.Error -> {}
-                //_signInState.update { it.copy(googleAuthError = R.string.error) }
+               is NativeSignInResult.Error ->
+                  _uiEffect.emit(UiEffect.ShowSnackbar(R.string.login_error))
 
-            is NativeSignInResult.NetworkError -> {}
-                //_signInState.update { it.copy(googleAuthError = R.string.network_error) }
 
-            is NativeSignInResult.ClosedByUser -> {}
-        }
+               is NativeSignInResult.NetworkError ->
+                   _uiEffect.emit(UiEffect.ShowSnackbar(R.string.error))
+
+               is NativeSignInResult.ClosedByUser -> {}
+           }
+       }
     }
 }

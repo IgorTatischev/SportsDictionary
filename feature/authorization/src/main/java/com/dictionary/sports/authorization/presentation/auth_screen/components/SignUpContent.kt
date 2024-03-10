@@ -37,6 +37,6 @@ fun SignUpContent(
             }
         }
 
-        GoogleSignInDisplay(authorizationViewModel = authorizationViewModel)
+        GoogleSignInDisplay(screenModel = authorizationViewModel)
     }
 }

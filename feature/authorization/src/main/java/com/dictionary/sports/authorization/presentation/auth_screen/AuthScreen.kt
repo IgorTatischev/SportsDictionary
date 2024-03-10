@@ -12,7 +12,7 @@ import com.dictionary.sports.common.navigation.SharedScreen
 class AuthScreen : Screen {
     @Composable
     override fun Content() {
-        val authorizationViewModel = getScreenModel<AuthorizationViewModel>()
+        val screenModel = getScreenModel<AuthorizationViewModel>()
         val navigator = LocalNavigator.currentOrThrow
 
         val menuScreen = rememberScreen(SharedScreen.Menu)
@@ -21,7 +21,7 @@ class AuthScreen : Screen {
         val navigateToMenuScreen = { navigator.replaceAll(menuScreen) }
 
         AuthScreenContent(
-            authorizationViewModel = authorizationViewModel,
+            authorizationViewModel = screenModel,
             navigateToMenuScreen = navigateToMenuScreen,
             navigateBack = navigateBack
         )
