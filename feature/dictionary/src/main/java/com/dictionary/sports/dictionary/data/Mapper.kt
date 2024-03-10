@@ -3,7 +3,7 @@ package com.dictionary.sports.dictionary.data
 import com.dictionary.sports.dictionary.data.model.CommentEntity
 import com.dictionary.sports.dictionary.domain.model.Comment
 
-fun CommentEntity.toComment(): Comment {
+internal fun CommentEntity.toComment(): Comment {
     return Comment(
         id = id,
         createdAt = createdAt,
@@ -14,7 +14,7 @@ fun CommentEntity.toComment(): Comment {
     )
 }
 
-fun Comment.toEntity(): CommentEntity {
+internal fun Comment.toEntity(): CommentEntity {
     return CommentEntity(
         id = id,
         createdAt = createdAt,

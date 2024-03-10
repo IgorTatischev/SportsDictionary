@@ -16,7 +16,7 @@ import com.dictionary.sports.ui.theme.whiteGradient
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuTopBar(scrollBehavior: TopAppBarScrollBehavior, action: () -> Unit) {
+internal fun MenuTopBar(scrollBehavior: TopAppBarScrollBehavior, action: () -> Unit) {
     TopAppBar(
         title = {},
         actions = {

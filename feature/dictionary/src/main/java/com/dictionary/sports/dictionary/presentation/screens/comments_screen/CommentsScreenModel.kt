@@ -1,4 +1,4 @@
-package com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel
+package com.dictionary.sports.dictionary.presentation.screens.comments_screen
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class CommentsViewModel(
+internal class CommentsScreenModel(
     private val supabaseComments: SupabaseComments,
     private val supabaseRepository: SupabaseRepository,
     private val dataStorePreferencesRepository: DataStorePreferencesRepository,

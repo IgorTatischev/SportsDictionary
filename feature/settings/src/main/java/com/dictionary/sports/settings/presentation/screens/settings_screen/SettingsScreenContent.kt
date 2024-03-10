@@ -27,31 +27,31 @@ import androidx.compose.ui.unit.dp
 import com.dictionary.sports.common.locale.AppLanguage
 import com.dictionary.sports.settings.R
 import com.dictionary.sports.settings.presentation.components.AccountActionsButtons
+import com.dictionary.sports.settings.presentation.components.ChangeNameDialog
 import com.dictionary.sports.settings.presentation.components.LanguageSpinner
 import com.dictionary.sports.settings.presentation.components.SettingsButton
 import com.dictionary.sports.settings.presentation.components.SettingsTopBar
-import com.dictionary.sports.settings.presentation.screens.settings_screen.components.ChangeNameDialog
 import com.dictionary.sports.ui.components.BackgroundMain
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreenUi(
-    viewModel: SettingsViewModel,
+internal fun SettingsScreenContent(
+    screenModel: SettingsScreenModel,
     navigateBack: () -> Boolean,
-    navigateToSignInScreen: () -> Unit,
+    navigateToAuthScreen: () -> Unit,
 ) {
     val context = LocalContext.current
-    val state = viewModel.state.collectAsState().value
+    val state = screenModel.state.collectAsState().value
     val snackbarHostState = remember { SnackbarHostState() }
 
     if (state.showDialog)
         ChangeNameDialog(
-            settingsViewModel = viewModel
+            screenModel = screenModel
         )
 
     LaunchedEffect(key1 = true) {
-        viewModel.uiEffect.collectLatest { effect ->
+        screenModel.uiEffect.collectLatest { effect ->
             when (effect) {
                 is UiEffect.ShowSnackbar -> {
                     snackbarHostState.showSnackbar(message = context.getString(effect.resId))
@@ -69,12 +69,12 @@ fun SettingsScreenUi(
         floatingActionButton = {
             AccountActionsButtons(
                 onDeleteAccountClick = {
-                    viewModel.deleteUser()
-                    navigateToSignInScreen()
+                    screenModel.deleteUser()
+                    navigateToAuthScreen()
                 },
                 onSignInClick = {
-                    viewModel.signOut()
-                    navigateToSignInScreen()
+                    screenModel.signOut()
+                    navigateToAuthScreen()
                 }
             )
         },
@@ -93,15 +93,15 @@ fun SettingsScreenUi(
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             SettingsButton(text = stringResource(id = R.string.write_us)) {
-                viewModel.openEmail()
+                screenModel.openEmail()
             }
 
             SettingsButton(text = stringResource(id = R.string.rate_us)) {
-                viewModel.openMarket()
+                screenModel.openMarket()
             }
 
             SettingsButton(text = stringResource(id = R.string.change_name)) {
-                viewModel.showDialog()
+                screenModel.showDialog()
             }
 
             Text(
@@ -118,7 +118,7 @@ fun SettingsScreenUi(
                 languages = AppLanguage.values().toList(),
                 selected = state.selectedLanguages
             ) {
-                viewModel.changeLanguage(it)
+                screenModel.changeLanguage(it)
             }
         }
     }

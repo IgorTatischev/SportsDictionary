@@ -8,22 +8,18 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.dictionary.sports.common.navigation.SharedScreen
 
-
-class SettingsScreen : Screen {
+internal class SettingsScreen : Screen {
     @Composable
     override fun Content() {
-        val settingsViewModel = getScreenModel<SettingsViewModel>()
 
+        val screenModel = getScreenModel<SettingsScreenModel>()
         val navigator = LocalNavigator.currentOrThrow
-        val registrationScreen = rememberScreen(SharedScreen.Auth)
+        val authScreen = rememberScreen(SharedScreen.Auth)
 
-        val navigateBack = { navigator.pop() }
-        val navigateToSignInScreen = { navigator.push(registrationScreen) }
-
-        SettingsScreenUi(
-            viewModel = settingsViewModel,
-            navigateBack = navigateBack,
-            navigateToSignInScreen = navigateToSignInScreen
+        SettingsScreenContent(
+            screenModel = screenModel,
+            navigateBack = { navigator.pop() },
+            navigateToAuthScreen =  { navigator.replaceAll(authScreen) }
         )
     }
 }

@@ -1,7 +1,6 @@
 package com.dictionary.sports.authorization.repository
 
-interface SupabaseAuth {
-
+internal interface SupabaseAuth {
     suspend fun signUp(
         navigateToScreen: () -> Unit,
         userLogin: String,

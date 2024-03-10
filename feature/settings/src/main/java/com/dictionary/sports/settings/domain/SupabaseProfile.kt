@@ -2,9 +2,9 @@ package com.dictionary.sports.settings.domain
 
 import com.dictionary.sports.settings.domain.model.Profile
 
-interface SupabaseProfile {
+internal interface SupabaseProfile {
 
-    suspend fun deleteUser()
+    suspend fun deleteUser(): Result<Unit>
 
     suspend fun changeUserData(
         login: String,
@@ -14,5 +14,5 @@ interface SupabaseProfile {
 
     suspend fun getUserData() : Result<Profile>
 
-    suspend fun signOut()
+    suspend fun signOut(): Result<Unit>
 }

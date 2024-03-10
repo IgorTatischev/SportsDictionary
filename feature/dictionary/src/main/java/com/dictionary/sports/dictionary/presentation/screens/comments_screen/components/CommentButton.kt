@@ -16,10 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dictionary.sports.dictionary.R
-import com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel.CommentsViewModel
 
 @Composable
-fun CommentButton(onClick: () -> Unit) {
+internal fun CommentButton(onClick: () -> Unit) {
     Button(
         modifier = Modifier.padding(bottom = 6.dp),
         onClick = onClick,

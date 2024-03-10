@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SportCard(color: Color, iconResId: Int, nameResId: Int, onClick: () -> Unit) {
+internal fun SportCard(color: Color, iconResId: Int, nameResId: Int, onClick: () -> Unit) {
     Card(
         modifier = Modifier.padding(horizontal = 15.dp),
         colors = CardDefaults.cardColors(

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsTopBar(
+internal fun SettingsTopBar(
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     navigateBack: () -> Unit,
 ) {

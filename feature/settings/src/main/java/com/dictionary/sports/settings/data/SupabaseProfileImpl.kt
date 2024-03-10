@@ -3,23 +3,25 @@ package com.dictionary.sports.settings.data
 import com.dictionary.sports.settings.data.model.ProfileEntity
 import com.dictionary.sports.settings.domain.SupabaseProfile
 import com.dictionary.sports.settings.domain.model.Profile
-import com.dictionary.sports.supabase.repository.SupabaseRepository
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.postgrest.rpc
 import kotlinx.serialization.json.put
 
 internal class SupabaseProfileImpl(
     private val client: SupabaseClient,
-    private val supabaseRepository: SupabaseRepository,
 ) : SupabaseProfile {
 
-    override suspend fun deleteUser() {
-        TODO()
+    override suspend fun deleteUser(): Result<Unit> = runCatching {
+        client.postgrest.rpc("delete_user")
     }
 
-    override suspend fun signOut() = client.auth.signOut()
+    override suspend fun signOut(): Result<Unit> = runCatching {
+        client.auth.signOut()
+    }
 
     override suspend fun changeUserData(
         login: String,

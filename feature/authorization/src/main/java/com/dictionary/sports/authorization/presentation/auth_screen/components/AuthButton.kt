@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.dictionary.sports.authorization.R
 
 @Composable
-fun AuthButton(
+internal fun AuthButton(
     textRes: Int = R.string.button_sign_in,
     action: () -> Unit
 ) {

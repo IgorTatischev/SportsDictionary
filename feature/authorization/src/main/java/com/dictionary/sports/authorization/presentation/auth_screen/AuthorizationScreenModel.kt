@@ -1,4 +1,4 @@
-package com.dictionary.sports.authorization.presentation.auth_screen.viewmodel
+package com.dictionary.sports.authorization.presentation.auth_screen
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class AuthorizationViewModel(
+internal class AuthorizationScreenModel(
     private val auth: SupabaseAuth,
     private val supabaseRepository: SupabaseRepository,
     client: SupabaseClient,

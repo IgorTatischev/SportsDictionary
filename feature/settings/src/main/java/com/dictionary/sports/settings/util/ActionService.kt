@@ -5,10 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import com.dictionary.sports.settings.R
 
-class ActionService(private val context: Context) {
-
+internal class ActionService(private val context: Context) {
     fun openEmail() {
-        val emailAddress = arrayOf(email)
+        val emailAddress = arrayOf(EMAIL)
         val intent = Intent(Intent.ACTION_SEND)
             .putExtra(Intent.EXTRA_EMAIL, emailAddress)
             .setType("message/rfc822")
@@ -31,6 +30,6 @@ class ActionService(private val context: Context) {
     }
 
     companion object {
-        const val email = "support@gmail.com"
+        const val EMAIL = "support@gmail.com"
     }
 }

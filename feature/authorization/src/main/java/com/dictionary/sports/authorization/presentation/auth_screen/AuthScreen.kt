@@ -6,24 +6,20 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.dictionary.sports.authorization.presentation.auth_screen.viewmodel.AuthorizationViewModel
 import com.dictionary.sports.common.navigation.SharedScreen
 
-class AuthScreen : Screen {
+internal class AuthScreen : Screen {
     @Composable
     override fun Content() {
-        val screenModel = getScreenModel<AuthorizationViewModel>()
-        val navigator = LocalNavigator.currentOrThrow
 
+        val screenModel = getScreenModel<AuthorizationScreenModel>()
+        val navigator = LocalNavigator.currentOrThrow
         val menuScreen = rememberScreen(SharedScreen.Menu)
 
-        val navigateBack = { navigator.pop() }
-        val navigateToMenuScreen = { navigator.replaceAll(menuScreen) }
-
         AuthScreenContent(
-            authorizationViewModel = screenModel,
-            navigateToMenuScreen = navigateToMenuScreen,
-            navigateBack = navigateBack
+            screenModel = screenModel,
+            navigateToMenuScreen = { navigator.replaceAll(menuScreen) },
+            navigateBack =  { navigator.pop() }
         )
     }
 }

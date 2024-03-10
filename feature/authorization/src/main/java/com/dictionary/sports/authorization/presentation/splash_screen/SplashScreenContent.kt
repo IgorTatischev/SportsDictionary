@@ -10,10 +10,10 @@ import com.dictionary.sports.ui.components.Background
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun SplashScreenContent(
+internal fun SplashScreenContent(
     navigateToWelcomeScreen: () -> Unit,
     navigateToMenuScreen: () -> Unit,
-    splashViewModel: SplashViewModel,
+    screenModel: SplashScreenModel,
 ) {
     val scale = remember {
         Animatable(0f)
@@ -36,14 +36,14 @@ fun SplashScreenContent(
                     OvershootInterpolator(4f).getInterpolation(it)
                 })
         )
-        splashViewModel.isUserLoggedIn()
+        screenModel.isUserLoggedIn()
     }
 
     LaunchedEffect(key1 = Unit) {
-        splashViewModel.sideEffect.collectLatest { sideEffect ->
+        screenModel.uiEffect.collectLatest { sideEffect ->
             when (sideEffect) {
-                is SplashScreenSideEffect.MoveToMenu -> navigateToMenuScreen()
-                is SplashScreenSideEffect.MoveToAuth -> navigateToWelcomeScreen()
+                is UiEffect.MoveToMenu -> navigateToMenuScreen()
+                is UiEffect.MoveToAuth -> navigateToWelcomeScreen()
             }
         }
     }

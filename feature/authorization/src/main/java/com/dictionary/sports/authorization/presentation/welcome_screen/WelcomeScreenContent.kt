@@ -13,7 +13,7 @@ import com.dictionary.sports.authorization.presentation.welcome_screen.component
 import com.dictionary.sports.ui.components.Background
 
 @Composable
-fun WelcomeScreenContent(
+internal fun WelcomeScreenContent(
     navigateToSignUpScreen: () -> Unit,
     navigateToMenuScreen: () -> Unit
 ) {

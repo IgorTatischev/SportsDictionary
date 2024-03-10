@@ -1,6 +1,5 @@
 package com.dictionary.sports.authorization.presentation.splash_screen
 
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import cafe.adriel.voyager.core.model.ScreenModel
@@ -18,15 +17,15 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-class SplashViewModel(
+internal class SplashScreenModel(
     private val dataStorePreferencesRepository: DataStorePreferencesRepository,
     private val supabaseRepository: SupabaseRepository
 ) : ScreenModel {
 
     private var token = ""
 
-    private val _sideEffect = MutableSharedFlow<SplashScreenSideEffect>()
-    val sideEffect = _sideEffect.asSharedFlow()
+    private val _uiEffect = MutableSharedFlow<UiEffect>()
+    val uiEffect = _uiEffect.asSharedFlow()
 
     init {
         setLanguage()
@@ -37,13 +36,13 @@ class SplashViewModel(
         screenModelScope.launch(Dispatchers.IO) {
             when (val result = supabaseRepository.isUserLoggedIn(token)) {
                 is LoggedInState.Error -> {
-                    _sideEffect.emit(SplashScreenSideEffect.MoveToAuth)
+                    _uiEffect.emit(UiEffect.MoveToAuth)
                 }
                 is LoggedInState.Success -> {
                     if(result.isLoggedIn)
-                        _sideEffect.emit(SplashScreenSideEffect.MoveToMenu)
+                        _uiEffect.emit(UiEffect.MoveToMenu)
                     else
-                        _sideEffect.emit(SplashScreenSideEffect.MoveToAuth)
+                        _uiEffect.emit(UiEffect.MoveToAuth)
                 }
             }
         }

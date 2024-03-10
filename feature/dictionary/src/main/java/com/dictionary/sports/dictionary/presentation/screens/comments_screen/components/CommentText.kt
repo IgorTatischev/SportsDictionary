@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.dictionary.sports.dictionary.domain.model.Comment
 
 @Composable
-fun Comment(
+internal fun CommentText(
     comment: Comment,
     modifier: Modifier = Modifier
 ) {

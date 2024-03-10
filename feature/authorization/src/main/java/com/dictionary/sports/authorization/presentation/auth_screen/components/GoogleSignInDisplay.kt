@@ -17,13 +17,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dictionary.sports.authorization.R
-import com.dictionary.sports.authorization.presentation.auth_screen.viewmodel.AuthorizationViewModel
+import com.dictionary.sports.authorization.presentation.auth_screen.AuthorizationScreenModel
 import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle
 import io.github.jan.supabase.compose.auth.composeAuth
 
 @Composable
-fun GoogleSignInDisplay(
-    screenModel: AuthorizationViewModel,
+internal fun GoogleSignInDisplay(
+    screenModel: AuthorizationScreenModel,
 ) {
 
     val authState = screenModel.googleClient.composeAuth.rememberSignInWithGoogle(

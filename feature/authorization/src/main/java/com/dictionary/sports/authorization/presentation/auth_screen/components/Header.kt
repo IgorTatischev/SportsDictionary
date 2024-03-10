@@ -16,7 +16,7 @@ import com.dictionary.sports.authorization.R
 import com.dictionary.sports.resources.R as CoreRes
 
 @Composable
-fun Header(navigateBack: () -> Boolean) {
+internal fun Header(navigateBack: () -> Boolean) {
     Column(
         modifier = Modifier
             .fillMaxWidth()

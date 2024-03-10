@@ -30,7 +30,7 @@ import com.dictionary.sports.dictionary.presentation.components.SportCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SportDescriptionScreenContent(
+internal fun SportDescriptionScreenContent(
     item: Sports,
     navigateBack: () -> Boolean,
     navigateToComments: (Int) -> Unit

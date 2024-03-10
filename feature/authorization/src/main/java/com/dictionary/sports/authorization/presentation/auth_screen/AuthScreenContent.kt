@@ -18,23 +18,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.dictionary.sports.authorization.presentation.auth_screen.components.Header
 import com.dictionary.sports.authorization.presentation.auth_screen.components.SignUpContent
-import com.dictionary.sports.authorization.presentation.auth_screen.viewmodel.AuthorizationViewModel
-import com.dictionary.sports.authorization.presentation.auth_screen.viewmodel.UiEffect
 import com.dictionary.sports.ui.components.Background
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun AuthScreenContent(
+internal fun AuthScreenContent(
     navigateToMenuScreen: () -> Unit,
     navigateBack: () -> Boolean,
-    authorizationViewModel: AuthorizationViewModel,
+    screenModel: AuthorizationScreenModel,
 ) {
 
     val context = LocalContext.current
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
-        authorizationViewModel.uiEffect.collectLatest { effect ->
+        screenModel.uiEffect.collectLatest { effect ->
             when (effect) {
                 is UiEffect.NavigateToMenuScreen -> navigateToMenuScreen()
                 is UiEffect.ShowSnackbar -> {
@@ -63,7 +61,7 @@ fun AuthScreenContent(
 
             SignUpContent(
                 navigateToMenuScreen = navigateToMenuScreen,
-                authorizationViewModel = authorizationViewModel
+                authorizationViewModel = screenModel
             )
 
             Spacer(modifier = Modifier.padding(bottom = 26.dp))

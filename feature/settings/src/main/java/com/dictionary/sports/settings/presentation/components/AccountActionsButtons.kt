@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.dictionary.sports.settings.R
 
 @Composable
-fun AccountActionsButtons(
+internal fun AccountActionsButtons(
     onDeleteAccountClick: () -> Unit,
     onSignInClick: () -> Unit,
 ) {

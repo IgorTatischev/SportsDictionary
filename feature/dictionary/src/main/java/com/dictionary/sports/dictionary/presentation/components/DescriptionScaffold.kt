@@ -30,7 +30,7 @@ import com.dictionary.sports.resources.R as CoreRes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DescriptionScaffold(
+internal fun DescriptionScaffold(
     scrollBehavior: TopAppBarScrollBehavior,
     navigateBack: () -> Unit,
     navigateToComments: () -> Unit,

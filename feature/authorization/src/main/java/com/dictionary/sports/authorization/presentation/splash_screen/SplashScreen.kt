@@ -9,22 +9,19 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.dictionary.sports.authorization.presentation.welcome_screen.WelcomeScreen
 import com.dictionary.sports.common.navigation.SharedScreen
 
-class SplashScreen : Screen {
+internal class SplashScreen : Screen {
     @Composable
     override fun Content() {
 
-        val splashViewModel = getScreenModel<SplashViewModel>()
+        val screenModel = getScreenModel<SplashScreenModel>()
 
         val navigator = LocalNavigator.currentOrThrow
         val menuScreen = rememberScreen(SharedScreen.Menu)
 
-        val navigateToWelcomeScreen = { navigator.replaceAll(WelcomeScreen()) }
-        val navigateToMenuScreen = { navigator.replaceAll(menuScreen) }
-
         SplashScreenContent(
-            navigateToWelcomeScreen = navigateToWelcomeScreen,
-            navigateToMenuScreen = navigateToMenuScreen,
-            splashViewModel = splashViewModel
+            navigateToWelcomeScreen = { navigator.replaceAll(WelcomeScreen()) },
+            navigateToMenuScreen = { navigator.replaceAll(menuScreen) },
+            screenModel = screenModel
         )
     }
 }

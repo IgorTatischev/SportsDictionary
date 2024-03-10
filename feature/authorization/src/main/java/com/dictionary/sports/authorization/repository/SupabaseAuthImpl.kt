@@ -7,7 +7,7 @@ import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
-class SupabaseAuthImpl(
+internal class SupabaseAuthImpl(
     private val client: SupabaseClient,
     private val supabaseRepository: SupabaseRepository,
 ) : SupabaseAuth {

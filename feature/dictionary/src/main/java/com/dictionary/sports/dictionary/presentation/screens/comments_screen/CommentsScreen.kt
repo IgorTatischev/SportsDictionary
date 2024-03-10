@@ -7,27 +7,26 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel.CommentsViewModel
 
-data class CommentsScreen(val filterValue: Int) : Screen {
+internal class CommentsScreen(val filterValue: Int) : Screen {
     @Composable
     override fun Content() {
 
-        val commentsViewModel = getScreenModel<CommentsViewModel>()
+        val screenModel = getScreenModel<CommentsScreenModel>()
         val navigator = LocalNavigator.currentOrThrow
 
         LaunchedEffect(Unit) {
-            commentsViewModel.isUserLoggedIn()
+            screenModel.isUserLoggedIn()
         }
 
         CommentsScreenContent(
             filterValue = filterValue,
-            commentsViewModel = commentsViewModel,
+            screenModel = screenModel,
             navigateBack = { navigator.pop() }
         )
 
         DisposableEffect(Unit) {
-            onDispose { commentsViewModel.leaveComments() }
+            onDispose { screenModel.leaveComments() }
         }
     }
 }

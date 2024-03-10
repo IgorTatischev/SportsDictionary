@@ -1,4 +1,4 @@
-package com.dictionary.sports.settings.presentation.screens.settings_screen.components
+package com.dictionary.sports.settings.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,13 +15,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dictionary.sports.settings.R
-import com.dictionary.sports.settings.presentation.screens.settings_screen.SettingsViewModel
+import com.dictionary.sports.settings.presentation.screens.settings_screen.SettingsScreenModel
 
 @Composable
-fun ChangeNameDialog(
-    settingsViewModel: SettingsViewModel
+internal fun ChangeNameDialog(
+    screenModel: SettingsScreenModel
 ) {
-    val state = settingsViewModel.state.collectAsState().value
+    val state = screenModel.state.collectAsState().value
 
     AlertDialog(
         containerColor = MaterialTheme.colorScheme.background,
@@ -40,7 +40,7 @@ fun ChangeNameDialog(
                 OutlinedTextField(
                     value = state.loginText,
                     onValueChange = {
-                        settingsViewModel.setLogin(it)
+                        screenModel.setLogin(it)
                     },
                     placeholder = { Text(text = stringResource(id = R.string.login))},
                     shape = RoundedCornerShape(30),
@@ -50,7 +50,7 @@ fun ChangeNameDialog(
                 OutlinedTextField(
                     value = state.passwordText,
                     onValueChange = {
-                        settingsViewModel.setPassword(it)
+                        screenModel.setPassword(it)
                     },
                     placeholder = { Text(text = stringResource(R.string.password))},
                     shape = RoundedCornerShape(30),
@@ -60,7 +60,7 @@ fun ChangeNameDialog(
                 OutlinedTextField(
                     value = state.nameText,
                     onValueChange = {
-                        settingsViewModel.setUserName(it)
+                        screenModel.setUserName(it)
                     },
                     placeholder = { Text(text = stringResource(id = R.string.name))},
                     shape = RoundedCornerShape(30),
@@ -70,13 +70,13 @@ fun ChangeNameDialog(
             }
         },
         onDismissRequest = {
-            settingsViewModel.dialogDismiss()
+            screenModel.dialogDismiss()
         },
         confirmButton = {
             TextButton(
                 onClick = {
-                    settingsViewModel.changeData()
-                    settingsViewModel.dialogDismiss()
+                    screenModel.changeData()
+                    screenModel.dialogDismiss()
                 }
             ) {
                 Text(
@@ -88,7 +88,7 @@ fun ChangeNameDialog(
         dismissButton = {
             TextButton(
                 onClick = {
-                    settingsViewModel.dialogDismiss()
+                    screenModel.dialogDismiss()
                 }
             ) {
                 Text(

@@ -27,7 +27,7 @@ import com.dictionary.sports.resources.R as CoreRes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuScreenContent(
+internal fun MenuScreenContent(
     navigateToSettings: () -> Unit,
     navigateToSportScreen: (Sports) -> Unit
 ) {

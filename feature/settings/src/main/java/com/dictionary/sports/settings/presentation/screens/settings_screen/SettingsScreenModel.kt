@@ -1,16 +1,13 @@
 package com.dictionary.sports.settings.presentation.screens.settings_screen
 
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.dictionary.sports.common.datastore.DataStorePreferencesRepository
 import com.dictionary.sports.common.locale.AppLanguage
-import com.dictionary.sports.settings.R
 import com.dictionary.sports.settings.domain.SupabaseProfile
 import com.dictionary.sports.settings.util.ActionService
-import com.dictionary.sports.supabase.repository.SupabaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +19,7 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 import com.dictionary.sports.resources.R as CoreRes
 
-class SettingsViewModel(
+internal class SettingsScreenModel(
     private val dataStorePreferencesRepository: DataStorePreferencesRepository,
     private val actionService: ActionService,
     private val supabaseProfile: SupabaseProfile,
@@ -82,15 +79,6 @@ class SettingsViewModel(
         }
     }
 
-    //todo delete
-    fun deleteUser() {
-        screenModelScope.launch(Dispatchers.IO) {
-            TODO()
-        }
-    }
-
-    fun signOut() = screenModelScope.launch { supabaseProfile.signOut() }
-
     fun setLogin(newValue: String) = _state.update { it.copy(loginText = newValue) }
     fun setPassword(newValue: String) = _state.update { it.copy(passwordText = newValue) }
     fun setUserName(newValue: String) = _state.update { it.copy(nameText = newValue) }
@@ -127,4 +115,12 @@ class SettingsViewModel(
             }
         }
     }
+
+    fun deleteUser() {
+        screenModelScope.launch(Dispatchers.IO) {
+            supabaseProfile.deleteUser()
+        }
+    }
+
+    fun signOut() = screenModelScope.launch { supabaseProfile.signOut() }
 }

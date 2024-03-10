@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SettingsButton(text: String, onClick: () -> Unit) {
+internal fun SettingsButton(text: String, onClick: () -> Unit) {
     Button(
         modifier = Modifier
             .fillMaxWidth()

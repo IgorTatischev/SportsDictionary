@@ -3,7 +3,7 @@ package com.dictionary.sports.settings.presentation.screens.settings_screen
 import androidx.annotation.StringRes
 import com.dictionary.sports.common.locale.AppLanguage
 
-data class SettingsScreenState(
+internal data class SettingsScreenState(
     val nameText: String = "",
     val loginText: String = "",
     val passwordText: String = "",
@@ -11,7 +11,7 @@ data class SettingsScreenState(
     val showDialog: Boolean = false
 )
 
-sealed class UiEffect {
+internal sealed class UiEffect {
     data class ShowSnackbar(@StringRes val resId: Int) : UiEffect()
 }
 

@@ -13,25 +13,24 @@ import com.dictionary.sports.common.navigation.SharedScreen
 import com.dictionary.sports.common.sports.Sports
 import com.dictionary.sports.dictionary.presentation.screens.sport_screen.SportDescriptionScreen
 
-class MenuScreen : Screen {
+internal class MenuScreen : Screen {
     @Composable
     override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
 
+        val navigator = LocalNavigator.currentOrThrow
+        val context = LocalContext.current
         val settingsScreen = rememberScreen(SharedScreen.Settings)
 
-        val navigateToSettingsScreen = { navigator.push(settingsScreen) }
         val navigateToSportScreen: (Sports) -> Unit =
             { navigator.push(SportDescriptionScreen(item = it)) }
 
-        val context = LocalContext.current
         LaunchedEffect(true){
             val activity = context as Activity
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
         MenuScreenContent(
-            navigateToSettings = navigateToSettingsScreen,
+            navigateToSettings = { navigator.push(settingsScreen) },
             navigateToSportScreen = navigateToSportScreen,
         )
     }

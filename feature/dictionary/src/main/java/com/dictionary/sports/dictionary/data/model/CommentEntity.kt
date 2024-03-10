@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CommentEntity(
+internal data class CommentEntity(
 
     val id: Int = 0,
 

@@ -1,6 +1,6 @@
 package com.dictionary.sports.dictionary.domain.model
 
-data class Comment(
+internal data class Comment(
     val id: Int = 0,
 
     val createdAt: String,

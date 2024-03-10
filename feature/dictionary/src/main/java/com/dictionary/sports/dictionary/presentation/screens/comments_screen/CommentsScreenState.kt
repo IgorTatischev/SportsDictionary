@@ -1,14 +1,14 @@
-package com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel
+package com.dictionary.sports.dictionary.presentation.screens.comments_screen
 
 import com.dictionary.sports.dictionary.domain.model.Comment
 
-data class CommentsScreenState(
+internal data class CommentsScreenState(
     val isLogged: Boolean = false,
     val commentText: String = "",
     val commentsState: CommentsState = CommentsState.Loading
 )
 
-sealed interface CommentsState {
+internal sealed interface CommentsState {
     object Loading : CommentsState
 
     data class Success(

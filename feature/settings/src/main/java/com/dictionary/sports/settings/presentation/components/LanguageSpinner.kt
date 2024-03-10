@@ -20,7 +20,7 @@ import com.dictionary.sports.common.locale.AppLanguage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LanguageSpinner(
+internal fun LanguageSpinner(
     modifier: Modifier = Modifier,
     languages: List<AppLanguage>,
     selected: String,

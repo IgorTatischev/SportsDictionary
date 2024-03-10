@@ -26,7 +26,7 @@ import com.dictionary.sports.authorization.presentation.auth_screen.components.A
 import com.dictionary.sports.ui.theme.grayBlueButtonColor
 
 @Composable
-fun BottomButtons(
+internal fun BottomButtons(
     navigateToRegistrationScreen: () -> Unit,
     navigateToMenuScreen: () -> Unit
 ) {

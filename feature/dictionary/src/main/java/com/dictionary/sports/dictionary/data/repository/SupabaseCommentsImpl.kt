@@ -9,9 +9,7 @@ import com.dictionary.sports.supabase.repository.SupabaseRepository
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.gotrue.auth
-import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
-import io.github.jan.supabase.postgrest.query.Order
 import io.github.jan.supabase.postgrest.query.filter.FilterOperation
 import io.github.jan.supabase.postgrest.query.filter.FilterOperator
 import io.github.jan.supabase.realtime.channel
@@ -21,14 +19,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 
 @OptIn(SupabaseExperimental::class)
-class SupabaseCommentsImpl(
+internal class SupabaseCommentsImpl(
     private val client: SupabaseClient,
     private val supabaseRepository: SupabaseRepository,
 ) : SupabaseComments {

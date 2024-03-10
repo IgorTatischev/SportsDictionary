@@ -8,12 +8,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.dictionary.sports.authorization.R
-import com.dictionary.sports.authorization.presentation.auth_screen.viewmodel.AuthorizationViewModel
+import com.dictionary.sports.authorization.presentation.auth_screen.AuthorizationScreenModel
 
 @Composable
-fun SignUpContent(
+internal fun SignUpContent(
     navigateToMenuScreen: () -> Unit,
-    authorizationViewModel: AuthorizationViewModel,
+    authorizationViewModel: AuthorizationScreenModel,
 ) {
     Column(
         modifier = Modifier
@@ -21,7 +21,7 @@ fun SignUpContent(
         verticalArrangement = Arrangement.spacedBy(36.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextFields(authorizationViewModel = authorizationViewModel)
+        LoginDataTextFields(authorizationViewModel = authorizationViewModel)
 
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             AuthButton {

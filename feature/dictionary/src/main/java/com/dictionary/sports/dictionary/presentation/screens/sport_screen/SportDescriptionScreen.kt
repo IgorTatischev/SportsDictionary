@@ -8,7 +8,7 @@ import com.dictionary.sports.common.sports.Sports
 import com.dictionary.sports.dictionary.presentation.screens.comments_screen.CommentsScreen
 
 
-data class SportDescriptionScreen(val item: Sports) : Screen {
+internal class SportDescriptionScreen(val item: Sports) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow

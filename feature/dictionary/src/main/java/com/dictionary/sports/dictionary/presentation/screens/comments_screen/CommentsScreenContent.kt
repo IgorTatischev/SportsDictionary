@@ -26,16 +26,14 @@ import com.dictionary.sports.dictionary.presentation.screens.comments_screen.com
 import com.dictionary.sports.dictionary.presentation.screens.comments_screen.components.CommentTextField
 import com.dictionary.sports.dictionary.presentation.screens.comments_screen.components.CommentsTopBar
 import com.dictionary.sports.dictionary.presentation.screens.comments_screen.components.SuccessScreen
-import com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel.CommentsState
-import com.dictionary.sports.dictionary.presentation.screens.comments_screen.viewmodel.CommentsViewModel
 import com.dictionary.sports.ui.components.ErrorScreen
 import com.dictionary.sports.ui.components.backgroundGradient
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommentsScreenContent(
+internal fun CommentsScreenContent(
     filterValue: Int,
-    commentsViewModel: CommentsViewModel,
+    screenModel: CommentsScreenModel,
     navigateBack: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -62,10 +60,10 @@ fun CommentsScreenContent(
                 .padding(padding)
                 .fillMaxSize()
         ) {
-            val state = commentsViewModel.state.collectAsState().value
+            val state = screenModel.state.collectAsState().value
 
             LaunchedEffect(Unit) {
-                commentsViewModel.getComments(filterValue = filterValue)
+                screenModel.getComments(filterValue = filterValue)
             }
 
             when (state.commentsState) {
@@ -103,11 +101,11 @@ fun CommentsScreenContent(
                 ) {
                     CommentTextField(
                         value = state.commentText,
-                        onValueChange = { commentsViewModel.changeCommentText(newValue = it) }
+                        onValueChange = { screenModel.changeCommentText(newValue = it) }
                     )
 
                     CommentButton {
-                        commentsViewModel.createComment(filterValue = filterValue)
+                        screenModel.createComment(filterValue = filterValue)
                     }
                 }
         }

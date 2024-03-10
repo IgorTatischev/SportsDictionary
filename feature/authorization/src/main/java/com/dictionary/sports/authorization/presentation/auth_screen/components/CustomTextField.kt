@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.dictionary.sports.authorization.R
 
 @Composable
-fun CustomTextField(
+internal fun CustomTextField(
     text: String,
     labelTextRes: Int,
     keyboardOptions: KeyboardOptions,

@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.dictionary.sports.authorization.R
 
 @Composable
-fun Header() {
+internal fun Header() {
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.Top)
     ) {
