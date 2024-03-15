@@ -2,5 +2,5 @@ package com.dictionary.sports.common.locale
 
 enum class AppLanguage(val code: String) {
     EN("en"),
-    ES("es"),
+    RU("ru"),
 }

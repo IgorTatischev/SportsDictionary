@@ -20,6 +20,7 @@ internal class SupabaseProfileImpl(
     }
 
     override suspend fun signOut(): Result<Unit> = runCatching {
+        client.auth.clearSession()
         client.auth.signOut()
     }
 

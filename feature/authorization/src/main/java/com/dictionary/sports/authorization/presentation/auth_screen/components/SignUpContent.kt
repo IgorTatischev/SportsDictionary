@@ -11,10 +11,7 @@ import com.dictionary.sports.authorization.R
 import com.dictionary.sports.authorization.presentation.auth_screen.AuthorizationScreenModel
 
 @Composable
-internal fun SignUpContent(
-    navigateToMenuScreen: () -> Unit,
-    authorizationViewModel: AuthorizationScreenModel,
-) {
+internal fun SignUpContent(authorizationViewModel: AuthorizationScreenModel) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -25,15 +22,11 @@ internal fun SignUpContent(
 
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             AuthButton {
-                authorizationViewModel.signIn(
-                    navigateToScreen = navigateToMenuScreen
-                )
+                authorizationViewModel.signIn()
             }
 
             AuthButton(textRes = R.string.button_sign_up) {
-                authorizationViewModel.signUp(
-                    navigateToScreen = navigateToMenuScreen
-                )
+                authorizationViewModel.signUp()
             }
         }
 

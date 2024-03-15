@@ -88,7 +88,6 @@ kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collec
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-runtime-ktx" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
-material2 = { group = "androidx.compose.material", name = "material" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
@@ -97,11 +96,8 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 extended-icons = { module = "androidx.compose.material:material-icons-extended" }
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
-google-services = { module = "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin", version.ref = "google-services" }
-accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
 accompanist-navigation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 accompanist-permission = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 androidx-window = { module = "androidx.window:window", version.ref = "window" }
 
 kotlinx-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-json" }

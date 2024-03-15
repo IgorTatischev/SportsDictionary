@@ -7,51 +7,39 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import com.dictionary.sports.common.datastore.DataStorePreferencesRepository
 import com.dictionary.sports.common.locale.AppLanguage
 import com.dictionary.sports.supabase.repository.SupabaseRepository
-import com.dictionary.sports.supabase.state.LoggedInState
-import kotlinx.coroutines.Dispatchers
+import com.dictionary.sports.supabase.state.LoggedInStatus
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 internal class SplashScreenModel(
     private val dataStorePreferencesRepository: DataStorePreferencesRepository,
-    private val supabaseRepository: SupabaseRepository
+    private val supabaseRepository: SupabaseRepository,
 ) : ScreenModel {
-
-    private var token = ""
 
     private val _uiEffect = MutableSharedFlow<UiEffect>()
     val uiEffect = _uiEffect.asSharedFlow()
 
     init {
         setLanguage()
-        getToken()
+        isUserLoggedIn()
     }
 
-     fun isUserLoggedIn() {
-        screenModelScope.launch(Dispatchers.IO) {
-            when (val result = supabaseRepository.isUserLoggedIn(token)) {
-                is LoggedInState.Error -> {
-                    _uiEffect.emit(UiEffect.MoveToAuth)
-                }
-                is LoggedInState.Success -> {
-                    if(result.isLoggedIn)
-                        _uiEffect.emit(UiEffect.MoveToMenu)
-                    else
-                        _uiEffect.emit(UiEffect.MoveToAuth)
+    fun isUserLoggedIn() {
+        screenModelScope.launch {
+            supabaseRepository.isUserLoggedIn.collectLatest {
+                when (it) {
+                    is LoggedInStatus.Error -> _uiEffect.emit(UiEffect.MoveToAuth)
+                    is LoggedInStatus.Success ->
+                        if (it.isLoggedIn)
+                            _uiEffect.emit(UiEffect.MoveToMenu)
+                        else
+                            _uiEffect.emit(UiEffect.MoveToAuth)
                 }
             }
         }
-    }
-
-    private fun getToken() {
-        dataStorePreferencesRepository.getToken().onEach {
-            token = it
-        }.launchIn(screenModelScope)
     }
 
     private fun setLanguage() {

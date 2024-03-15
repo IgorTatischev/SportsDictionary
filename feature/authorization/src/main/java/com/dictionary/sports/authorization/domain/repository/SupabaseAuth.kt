@@ -1,14 +1,12 @@
-package com.dictionary.sports.authorization.repository
+package com.dictionary.sports.authorization.domain.repository
 
 internal interface SupabaseAuth {
     suspend fun signUp(
-        navigateToScreen: () -> Unit,
         userLogin: String,
         userPassword: String,
     ): Result<Unit>
 
     suspend fun signIn(
-        navigateToScreen: () -> Unit,
         userLogin: String,
         userPassword: String
     ): Result<Unit>

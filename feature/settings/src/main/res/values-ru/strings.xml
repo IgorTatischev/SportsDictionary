@@ -1,0 +1,20 @@
+<resources>
+    <string name="english">Английский</string>
+    <string name="russian">Русский</string>
+
+    <string name="login">Войти</string>
+    <string name="password">Пароль</string>
+    <string name="name">Имя</string>
+    <string name="delete">Удалить аккаунт</string>
+    <string name="success_delete_account">Аккаунт удален</string>
+    <string name="sign_out">Выйти</string>
+    <string name="write_us">Напишите нам</string>
+    <string name="rate_us">Оцените нас</string>
+    <string name="change_name">Изменить имя</string>
+    <string name="change_name_confirm">Изменить</string>
+    <string name="change_name_dismiss">Нет</string>
+    <string name="success_name_change">Имя успешно изменено!</string>
+    <string name="language">Язык</string>
+    <string name="mail_title">Выберите почтовый клиент</string>
+    <string name="by_email">По электронной почте: %s</string>
+</resources>

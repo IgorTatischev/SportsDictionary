@@ -1,0 +1,19 @@
+<resources>
+    <string name="button_sign_up">Зарегистрироваться</string>
+    <string name="button_sign_in">Войти</string>
+    <string name="header_title_text">Зарегистрироваться</string>
+    <string name="header_description_text">Зарегистрируйтесь, чтобы оставлять комментарии\nи сохранять понравившийся контент</string>
+    <string name="label_login">Электронная почта</string>
+    <string name="label_password">Пароль</string>
+    <string name="label_show">Показать</string>
+    <string name="label_hide">Скрыть</string>
+    <string name="text_sign_variant">Или войдите с помощью</string>
+    <string name="network_error">Произошла сетевая ошибка. Пожалуйста, проверьте ваше соединение</string>
+    <string name="error">Произошла ошибка</string>
+    <string name="login_error">Произошла ошибка! Проверьте данные для входа!</string>
+
+    # Welcome Screen
+    <string name="welcome_header_text">Добро пожаловать в\nспортивный глоссарий</string>
+    <string name="welcome_description_text">Давайте играть всегда\n и везде</string>
+    <string name="button_skip">Пропустить</string>
+</resources>
