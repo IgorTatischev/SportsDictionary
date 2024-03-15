@@ -1,21 +1,19 @@
 package com.dictionary.sports.supabase.repository
 
-import com.dictionary.sports.common.datastore.DataStorePreferencesRepository
-import com.dictionary.sports.supabase.state.LoggedInState
+import com.dictionary.sports.supabase.state.LoggedInStatus
 import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.gotrue.SessionStatus
 import io.github.jan.supabase.gotrue.auth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import org.json.JSONObject
 
-internal class SupabaseRepositoryImpl(
-    private val client: SupabaseClient,
-    private val dataStorePreferencesRepository: DataStorePreferencesRepository
-) : SupabaseRepository {
+internal class SupabaseRepositoryImpl(private val client: SupabaseClient) : SupabaseRepository {
 
-    override suspend fun saveToken() {
-        val accessToken = client.auth.currentAccessTokenOrNull()
-        accessToken?.let {
-            dataStorePreferencesRepository.saveToken(token = accessToken)
-        }
+    override suspend fun getToken(): String? {
+        return client.auth.currentAccessTokenOrNull()
     }
 
     override suspend fun getCurrentUserName(): String {
@@ -32,18 +30,26 @@ internal class SupabaseRepositoryImpl(
         return name
     }
 
-    override suspend fun isUserLoggedIn(token: String): LoggedInState {
-        return try {
-            if (token.isNotEmpty()) {
-                client.auth.retrieveUser(token)
-                client.auth.refreshCurrentSession()
-                saveToken()
-                LoggedInState.Success(isLoggedIn = true)
-            } else {
-                LoggedInState.Success(isLoggedIn = false)
+    override val isUserLoggedIn: Flow<LoggedInStatus> = flow {
+
+        client.auth.sessionStatus.collect {
+            when (it) {
+                is SessionStatus.Authenticated ->
+                    emit(LoggedInStatus.Success(isLoggedIn = true))
+                //saveToken() not needed yet
+
+                is SessionStatus.LoadingFromStorage -> {
+                    //saveToken()
+                    client.auth.refreshCurrentSession()
+                    emit(LoggedInStatus.Success(isLoggedIn = false))
+                }
+
+                is SessionStatus.NetworkError ->
+                    emit(LoggedInStatus.Error(message = "Network Error"))
+
+                is SessionStatus.NotAuthenticated -> emit(LoggedInStatus.Success(isLoggedIn = false))
             }
-        } catch (e: Exception) {
-            LoggedInState.Error(message = e.message.orEmpty())
         }
-    }
+    }.flowOn(Dispatchers.IO)
+
 }

@@ -59,10 +59,7 @@ internal fun AuthScreenContent(
         ) {
             Header(navigateBack = navigateBack)
 
-            SignUpContent(
-                navigateToMenuScreen = navigateToMenuScreen,
-                authorizationViewModel = screenModel
-            )
+            SignUpContent(authorizationViewModel = screenModel)
 
             Spacer(modifier = Modifier.padding(bottom = 26.dp))
         }

@@ -1,19 +1,15 @@
-package com.dictionary.sports.authorization.repository
+package com.dictionary.sports.authorization.data.repository
 
-import com.dictionary.sports.supabase.repository.SupabaseRepository
+import com.dictionary.sports.authorization.domain.repository.SupabaseAuth
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
-internal class SupabaseAuthImpl(
-    private val client: SupabaseClient,
-    private val supabaseRepository: SupabaseRepository,
-) : SupabaseAuth {
+internal class SupabaseAuthImpl(private val client: SupabaseClient) : SupabaseAuth {
 
     override suspend fun signUp(
-        navigateToScreen: () -> Unit,
         userLogin: String,
         userPassword: String,
     ): Result<Unit> = runCatching {
@@ -27,18 +23,9 @@ internal class SupabaseAuthImpl(
                 put("name", name)
             }
         }
-
-        supabaseRepository.saveToken()
-
-        signIn(
-            navigateToScreen = navigateToScreen,
-            userLogin = userLogin,
-            userPassword = userPassword
-        )
     }
 
     override suspend fun signIn(
-        navigateToScreen: () -> Unit,
         userLogin: String,
         userPassword: String,
     ): Result<Unit> = runCatching{
@@ -47,7 +34,5 @@ internal class SupabaseAuthImpl(
             email = userLogin.trim()
             password = userPassword.trim()
         }
-        supabaseRepository.saveToken()
-        navigateToScreen()
     }
 }

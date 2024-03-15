@@ -2,16 +2,15 @@ package com.dictionary.sports.dictionary.presentation.screens.comments_screen
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.dictionary.sports.common.datastore.DataStorePreferencesRepository
 import com.dictionary.sports.dictionary.domain.repository.SupabaseComments
 import com.dictionary.sports.supabase.repository.SupabaseRepository
-import com.dictionary.sports.supabase.state.LoggedInState
+import com.dictionary.sports.supabase.state.LoggedInStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -19,17 +18,10 @@ import kotlinx.coroutines.launch
 internal class CommentsScreenModel(
     private val supabaseComments: SupabaseComments,
     private val supabaseRepository: SupabaseRepository,
-    private val dataStorePreferencesRepository: DataStorePreferencesRepository,
 ) : ScreenModel {
-
-    private var token = ""
 
     private val _state = MutableStateFlow(CommentsScreenState())
     val state: StateFlow<CommentsScreenState> = _state.asStateFlow()
-
-    init {
-        getToken()
-    }
 
     fun changeCommentText(newValue: String) =
         _state.update { it.copy(commentText = newValue) }
@@ -73,21 +65,15 @@ internal class CommentsScreenModel(
     }
 
     fun isUserLoggedIn() {
-        screenModelScope.launch(Dispatchers.IO) {
-            when (val result = supabaseRepository.isUserLoggedIn(token)) {
-
-                is LoggedInState.Error -> _state.update { it.copy(isLogged = false) }
-
-                is LoggedInState.Success -> _state.update { it.copy(isLogged = result.isLoggedIn) }
+        screenModelScope.launch {
+            supabaseRepository.isUserLoggedIn.collectLatest { result ->
+                when (result) {
+                    is LoggedInStatus.Error -> _state.update { it.copy(isLogged = false) }
+                    is LoggedInStatus.Success -> _state.update { it.copy(isLogged = result.isLoggedIn) }
+                }
             }
         }
     }
 
     fun leaveComments() = screenModelScope.launch { supabaseComments.leaveChannel() }
-
-    private fun getToken() {
-        dataStorePreferencesRepository.getToken().onEach {
-            token = it
-        }.launchIn(screenModelScope)
-    }
 }

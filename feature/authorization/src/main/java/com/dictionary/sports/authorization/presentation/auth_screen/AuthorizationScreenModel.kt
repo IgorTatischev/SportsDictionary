@@ -3,8 +3,8 @@ package com.dictionary.sports.authorization.presentation.auth_screen
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.dictionary.sports.authorization.R
-import com.dictionary.sports.authorization.repository.SupabaseAuth
-import com.dictionary.sports.supabase.repository.SupabaseRepository
+import com.dictionary.sports.authorization.domain.use_case.SignInUseCase
+import com.dictionary.sports.authorization.domain.use_case.SignUpUseCase
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.compose.auth.composable.NativeSignInResult
 import kotlinx.coroutines.Dispatchers
@@ -16,8 +16,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 internal class AuthorizationScreenModel(
-    private val auth: SupabaseAuth,
-    private val supabaseRepository: SupabaseRepository,
+    private val signInUseCase: SignInUseCase,
+    private val signUpUseCase: SignUpUseCase,
     client: SupabaseClient,
 ) : ScreenModel {
 
@@ -37,49 +37,46 @@ internal class AuthorizationScreenModel(
         _signInState.update { it.copy(passwordText = newValue) }
     }
 
-    fun signUp(navigateToScreen: () -> Unit) = with(_signInState.value) {
+    fun signUp() = with(_signInState.value) {
         screenModelScope.launch(Dispatchers.IO) {
-            auth.signUp(
-                navigateToScreen = navigateToScreen,
-                userLogin = loginText,
-                userPassword = passwordText
+            signUpUseCase(
+                login = loginText,
+                userPassword = passwordText,
             ).onFailure {
                 _uiEffect.emit(UiEffect.ShowSnackbar(R.string.login_error))
+            }.onSuccess {
+                _uiEffect.emit(UiEffect.NavigateToMenuScreen)
             }
         }
     }
 
-    fun signIn(navigateToScreen: () -> Unit) = with(_signInState.value) {
+    fun signIn() = with(_signInState.value) {
         screenModelScope.launch(Dispatchers.IO) {
-            auth.signIn(
-                navigateToScreen = navigateToScreen,
-                userLogin = loginText,
+            signInUseCase(
+                login = loginText,
                 userPassword = passwordText
             ).onFailure {
                 _uiEffect.emit(UiEffect.ShowSnackbar(R.string.login_error))
+            }.onSuccess {
+                _uiEffect.emit(UiEffect.NavigateToMenuScreen)
             }
         }
     }
 
     fun loginWithGoogle(result: NativeSignInResult) {
-       screenModelScope.launch {
-           when (result) {
-               is NativeSignInResult.Success -> {
-                   screenModelScope.launch(Dispatchers.IO) {
-                       supabaseRepository.saveToken()
-                       _uiEffect.emit(UiEffect.NavigateToMenuScreen)
-                   }
-               }
+        screenModelScope.launch(Dispatchers.IO) {
+            when (result) {
+                is NativeSignInResult.Success ->
+                    _uiEffect.emit(UiEffect.NavigateToMenuScreen)
 
-               is NativeSignInResult.Error ->
-                  _uiEffect.emit(UiEffect.ShowSnackbar(R.string.login_error))
+                is NativeSignInResult.Error ->
+                    _uiEffect.emit(UiEffect.ShowSnackbar(R.string.login_error))
 
+                is NativeSignInResult.NetworkError ->
+                    _uiEffect.emit(UiEffect.ShowSnackbar(R.string.error))
 
-               is NativeSignInResult.NetworkError ->
-                   _uiEffect.emit(UiEffect.ShowSnackbar(R.string.error))
-
-               is NativeSignInResult.ClosedByUser -> {}
-           }
-       }
+                is NativeSignInResult.ClosedByUser -> {}
+            }
+        }
     }
 }
